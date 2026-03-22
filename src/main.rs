@@ -29,7 +29,8 @@ fn main() {
 
     // Read the puzzle file.
 
-    let input = std::fs::read_to_string("puzzle.txt").expect("couldn't open puzzle.txt");
+    let arg = std::env::args().skip(1).next().expect("need one argument");
+    let input = std::fs::read_to_string(&arg).expect("couldn't open puzzle.txt");
 
     for line in input.lines() {
         if let Some((left_raw, right)) = line.split_once(":") {
@@ -97,7 +98,7 @@ fn main() {
 
                 down_words.push((
                     board[y][x].number.unwrap(),
-                    (y..width).map_while(|y| board[y][x].letter).collect()
+                    (y..height).map_while(|y| board[y][x].letter).collect()
                 ));
             }
         }
@@ -108,6 +109,7 @@ fn main() {
     let deja = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu font");
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
     let deja_regular = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu font");
+    let deja_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu font");
 
     let scale: f32 = 128.0; // Side length of each cell in pixels.
 
@@ -157,16 +159,16 @@ fn main() {
 
     // Draw the clues.
 
-    let x = scale * (width as f32 + 1.0);
-    let mut y = scale * 0.8;
+    let mut x = scale * (width as f32 + 1.05);
+    let mut y = scale * 0.75;
     let mut lora_text = Text::new(&String::new(), &lora, 0);
     let mut deja_text = Text::new(&String::new(), &deja, 0);
-    let lora_size = 45.0; //self.dimensions.tile_size() * 0.5;
+    let lora_size = 40.0; //self.dimensions.tile_size() * 0.5;
     let line_gap = 50.0;
     let lora_gap = 60.0;
     let deja_size = 55.0;
     let deja_gap = 82.5;
-    let skip_gap = 36.0;
+    let skip_gap = 32.0;
     let number_gap = 65.0;
     let deja_x_offset = 4.0;
 
@@ -209,7 +211,7 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let clue_vec = clue_texts.get_mut(&word).expect(&format!("no clue entry for {word}"));
+        let clue_vec = clue_texts.get_mut(&word.to_uppercase()).expect(&format!("no clue entry for {word}"));
         if clue_vec.is_empty() {
             panic!("ran out of clue entries for {word}");
         }
@@ -245,6 +247,47 @@ fn main() {
 
         //lora_text.set_string(&format!("{number}. {}", clue.lines[0]));
 
+    }
+
+    // Draw the title and author if there are any.
+
+    x = scale * 0.5;
+    y = scale * (height as f32 + 1.08);
+
+    let mut title_text = Text::new(&String::new(), &deja, 0);
+    let title_size = 40.0;
+    let title_gap = 55.0;
+
+    title_text.set_fill_color(Color::BLACK);
+    title_text.set_character_size(title_size as u32);
+    title_text.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        title_size * 0.615,
+    ));
+
+    if let Some(title) = title {
+        title_text.set_position(Vector2f::new(x, y));
+        title_text.set_string(&title);
+        texture.draw(&title_text);
+
+        max_y_drawn = max_y_drawn.max(
+            y + title_text.local_bounds().height + scale * 0.3
+        );
+
+        y += title_gap;
+    }
+
+    if let Some(author) = author {
+        title_text.set_font(&deja_italic);
+        title_text.set_position(Vector2f::new(x, y));
+        title_text.set_string(&author);
+        texture.draw(&title_text);
+
+        max_y_drawn = max_y_drawn.max(
+            y + title_text.local_bounds().height + scale * 0.3
+        );
+
+        //y += title_gap;
     }
 
     // Save this texture as the puzzle image.
