@@ -1,5 +1,6 @@
 
 use std::collections::HashMap;
+use sfml::system::Vector2f;
 
 use sfml::graphics::*;
 use sfml::system::Vector2;
@@ -52,28 +53,81 @@ fn main() {
 
     // Define render constants.
 
-    let scale: f32 = 128.0; // Side length of each cell in pixels.
+    let deja = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu font");
+    let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
 
-    // Draw the board, clues, and title to a texture object.
+    let scale: f32 = 128.0; // Side length of each cell in pixels.
+    let height = board.len();
+    let width = board.iter().map(Vec::len).max().unwrap();
+
+    // Draw the board.
 
     let mut texture = RenderTexture::new(2048, 2048)
         .expect("could not create render texture");
 
     texture.clear(Color::WHITE);
 
-    for y in 0..10 {
-        for x in 0..10 {
+    for y in 0..height {
+        for x in 0..width {
             draw_square(
                 &mut texture,
                 (scale * (1.0 + x as f32), scale * (1.0 + y as f32)),
                 scale / 1.414213,
-                if x % 3 > 0 && y % 2 == 0 {Color::BLACK} else {Color::WHITE},
-                //if (x + y) % 2 == 0 {Color::WHITE} else {Color::BLACK},
-                //Color::WHITE,
+                if matches!(board[y].get(x), Some(Some(_))) {Color::WHITE} else {Color::BLACK},
                 scale * 0.05,
                 Color::BLACK,
             );
         }
+    }
+
+    // Draw the clues.
+
+    let x = scale * (width as f32 + 0.96);
+    let mut y = scale * 0.78;
+    let mut lora_text = Text::new(&String::new(), &lora, 0);
+    let mut deja_text = Text::new(&String::new(), &deja, 0);
+    let lora_size = 40.0; //self.dimensions.tile_size() * 0.5;
+    let lora_gap = 60.0;
+    let deja_size = 55.0;
+    let deja_gap = 82.5;
+    let skip_gap = 30.0;
+
+    lora_text.set_fill_color(Color::BLACK);
+    lora_text.set_character_size(lora_size as u32);
+    lora_text.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        lora_size * 0.615,
+    ));
+
+    deja_text.set_fill_color(Color::BLACK);
+    deja_text.set_character_size(deja_size as u32);
+    deja_text.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        deja_size * 0.615,
+    ));
+
+    for c in 0..11 {
+        if c == 0 {
+            deja_text.set_position(Vector2f::new(x, y));
+            deja_text.set_string("Across");
+            texture.draw(&deja_text);
+            y += deja_gap;
+        }
+
+        if c == 6 {
+            y += skip_gap;
+            deja_text.set_position(Vector2f::new(x, y));
+            deja_text.set_string("Down");
+            texture.draw(&deja_text);
+            y += deja_gap;
+        }
+
+
+        lora_text.set_position(Vector2f::new(x, y));
+        lora_text.set_string("Hello world");
+        texture.draw(&lora_text);
+
+        y += lora_gap;
     }
 
     // Save this texture as the puzzle image.
@@ -83,7 +137,7 @@ fn main() {
         .texture()
         .copy_to_image()
         .expect("failed to copy texture to image")
-        .save_to_file("output.png")
+        .save_to_file("puzzle.png")
         .expect("failed to save image file");
 
     // Add in the answers.
