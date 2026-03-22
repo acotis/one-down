@@ -1,2 +1,1 @@
-cargo run --release
-open puzzle.png
+cargo run --release && open puzzle.png

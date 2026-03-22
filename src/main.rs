@@ -5,6 +5,12 @@ use sfml::system::Vector2f;
 use sfml::graphics::*;
 use sfml::system::Vector2;
 
+#[derive(PartialEq, Eq)]
+struct Cell {
+    letter: Option<char>,
+    number: Option<usize>,
+}
+
 struct Clue {
     lines: Vec<String>,
     word_lengths: Vec<usize>,
@@ -14,10 +20,12 @@ fn main() {
 
     // Initialize the puzzle data.
 
-    let mut board: Vec<Vec<Option<char>>> = vec![];
+    let mut board: Vec<Vec<Cell>> = vec![];
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
-    let mut clues: HashMap<String, Vec<Clue>> = HashMap::new();
+    let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
+    let mut across_words: Vec<(usize, String)> = vec![];
+    let mut down_words: Vec<(usize, String)> = vec![];
 
     // Read the puzzle file.
 
@@ -36,7 +44,8 @@ fn main() {
                             .collect::<Vec<_>>()[..]
                     else {panic!()};
 
-                    clues.entry(word.trim().to_owned())
+                    clue_texts
+                         .entry(word.trim().to_owned())
                          .or_insert(vec![])
                          .push(Clue {
                              lines: right.trim().split("\\").map(str::trim).map(str::to_owned).collect(),
@@ -46,7 +55,50 @@ fn main() {
             }
         } else {
             if line.trim() != "" {
-                board.push(line.chars().filter(|c| *c != ' ').map(|c| if c == '.' {None} else {Some(c)}).collect());
+                board.push(line.chars().filter(|c| *c != ' ').map(|c| Cell {letter: if c == '.' {None} else {Some(c)}, number: None}).collect());
+            }
+        }
+    }
+
+    let height = board.len();
+    let width = board.iter().map(Vec::len).max().unwrap();
+
+    // Find the words.
+
+    let mut next_number = 1;
+
+    for y in 0..height {
+        for x in 0..width {
+            if x < width-1
+            && board[y][x  ].letter != None
+            && board[y][x+1].letter != None
+            && (x == 0 || board[y][x-1].letter == None)
+            {
+                if board[y][x].number == None {
+                    board[y][x].number = Some(next_number);
+                    next_number += 1;
+                }
+
+                across_words.push((
+                    board[y][x].number.unwrap(),
+                    (x..width).map_while(|x| board[y][x].letter).collect()
+                ));
+            }
+
+            if y < height-1
+            && board[y  ][x].letter != None
+            && board[y+1][x].letter != None
+            && (y == 0 || board[y-1][x].letter == None)
+            {
+                if board[y][x].number == None {
+                    board[y][x].number = Some(next_number);
+                    next_number += 1;
+                }
+
+                down_words.push((
+                    board[y][x].number.unwrap(),
+                    (y..width).map_while(|y| board[y][x].letter).collect()
+                ));
             }
         }
     }
@@ -57,12 +109,10 @@ fn main() {
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
 
     let scale: f32 = 128.0; // Side length of each cell in pixels.
-    let height = board.len();
-    let width = board.iter().map(Vec::len).max().unwrap();
 
     // Draw the board.
 
-    let mut texture = RenderTexture::new(2048, 2048)
+    let mut texture = RenderTexture::new(4096, 4096)
         .expect("could not create render texture");
 
     texture.clear(Color::WHITE);
@@ -73,24 +123,29 @@ fn main() {
                 &mut texture,
                 (scale * (1.0 + x as f32), scale * (1.0 + y as f32)),
                 scale / 1.414213,
-                if matches!(board[y].get(x), Some(Some(_))) {Color::WHITE} else {Color::BLACK},
+                if board[y][x].letter == None {Color::BLACK} else {Color::WHITE},
                 scale * 0.05,
                 Color::BLACK,
             );
         }
     }
 
+    let mut max_x_drawn = (width  as f32 + 1.0) * scale;
+    let mut max_y_drawn = (height as f32 + 1.0) * scale;
+
     // Draw the clues.
 
     let x = scale * (width as f32 + 0.96);
-    let mut y = scale * 0.78;
+    let mut y = scale * 0.8;
     let mut lora_text = Text::new(&String::new(), &lora, 0);
     let mut deja_text = Text::new(&String::new(), &deja, 0);
     let lora_size = 40.0; //self.dimensions.tile_size() * 0.5;
+    let line_gap = 50.0;
     let lora_gap = 60.0;
     let deja_size = 55.0;
     let deja_gap = 82.5;
-    let skip_gap = 30.0;
+    let skip_gap = 36.0;
+    let number_gap = 60.0;
 
     lora_text.set_fill_color(Color::BLACK);
     lora_text.set_character_size(lora_size as u32);
@@ -106,7 +161,10 @@ fn main() {
         deja_size * 0.615,
     ));
 
-    for c in 0..11 {
+    let across_count = across_words.len();
+    let down_count = down_words.len();
+
+    for c in 0..across_count+down_count {
         if c == 0 {
             deja_text.set_position(Vector2f::new(x, y));
             deja_text.set_string("Across");
@@ -114,7 +172,7 @@ fn main() {
             y += deja_gap;
         }
 
-        if c == 6 {
+        if c == across_count {
             y += skip_gap;
             deja_text.set_position(Vector2f::new(x, y));
             deja_text.set_string("Down");
@@ -122,21 +180,71 @@ fn main() {
             y += deja_gap;
         }
 
+        let (number, word) = if c < across_count {
+            across_words[c].clone()
+        } else {
+            down_words[c-across_count].clone()
+        };
+
+        let clue_vec = clue_texts.get_mut(&word).expect(&format!("no clue entry for {word}"));
+        if clue_vec.is_empty() {
+            panic!("ran out of clue entries for {word}");
+        }
+        let clue = clue_vec.remove(0);
 
         lora_text.set_position(Vector2f::new(x, y));
-        lora_text.set_string("Hello world");
+        lora_text.set_string(&format!("{number}."));
         texture.draw(&lora_text);
 
-        y += lora_gap;
+        for i in 0..clue.lines.len() {
+            let mut line = format!("{}", clue.lines[i]);
+
+            if i == clue.lines.len()-1 {
+                line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
+            }
+
+            lora_text.set_position(Vector2f::new(x + number_gap, y));
+            lora_text.set_string(&line);
+            texture.draw(&lora_text);
+
+            max_x_drawn = max_x_drawn.max(
+                x + number_gap + lora_text.local_bounds().width + scale * 0.4
+            );
+
+            max_y_drawn = max_y_drawn.max(
+                y + lora_text.local_bounds().height + scale * 0.3
+            );
+
+            y += line_gap;
+        }
+
+        y += lora_gap - line_gap;
+
+        //lora_text.set_string(&format!("{number}. {}", clue.lines[0]));
+
     }
 
     // Save this texture as the puzzle image.
 
     texture.display();
-    texture
+
+    let base_image = texture
         .texture()
         .copy_to_image()
-        .expect("failed to copy texture to image")
+        .expect("failed to copy texture to image");
+
+    let mut cropped_image = Image::new_solid(max_x_drawn as _, max_y_drawn as _, Color::WHITE)
+        .expect("failed to create cropping image");
+    
+    cropped_image.copy_image(
+        &base_image,
+        0,
+        0,
+        IntRect::new(0, 0, max_x_drawn as _, max_y_drawn as _),
+        false
+    );
+
+    cropped_image
         .save_to_file("puzzle.png")
         .expect("failed to save image file");
 
