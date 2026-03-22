@@ -107,6 +107,7 @@ fn main() {
 
     let deja = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu font");
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
+    let deja_regular = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu font");
 
     let scale: f32 = 128.0; // Side length of each cell in pixels.
 
@@ -117,16 +118,37 @@ fn main() {
 
     texture.clear(Color::WHITE);
 
+    let mut number_text = Text::new(&String::new(), &deja_regular, 0);
+    let number_size = 30.0;
+
+    number_text.set_fill_color(Color::rgb(0, 0, 0));
+    number_text.set_character_size(number_size as u32);
+    number_text.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        number_size * 0.615,
+    ));
+
     for y in 0..height {
         for x in 0..width {
+            let xpos = scale * (1.0 + x as f32);
+            let ypos = scale * (1.0 + y as f32);
             draw_square(
                 &mut texture,
-                (scale * (1.0 + x as f32), scale * (1.0 + y as f32)),
+                (xpos, ypos),
                 scale / 1.414213,
                 if board[y][x].letter == None {Color::BLACK} else {Color::WHITE},
                 scale * 0.05,
                 Color::BLACK,
             );
+
+            if let Some(number) = board[y][x].number {
+                number_text.set_position(Vector2f::new(
+                    xpos - scale * 0.4,
+                    ypos - scale * 0.28,
+                ));
+                number_text.set_string(&format!("{number}"));
+                texture.draw(&number_text);
+            }
         }
     }
 
