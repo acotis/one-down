@@ -316,7 +316,63 @@ fn main() {
 
     // Add in the answers.
 
+    let mut key_text = Text::new(&String::new(), &deja, 0);
+    let key_size = 70.0;
+
+    key_text.set_fill_color(Color::rgb(0, 0, 255));
+    key_text.set_character_size(key_size as u32);
+    key_text.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        key_size * 0.615,
+    ));
+
+    for y in 0..height {
+        for x in 0..width {
+            let xpos = scale * (1.00 + x as f32);
+            let ypos = scale * (1.08 + y as f32);
+
+            if let Some(letter) = board[y][x].letter {
+                let letter = letter.to_ascii_uppercase();
+                let glyph = deja.glyph(
+                    letter as u32,
+                    key_size as u32,
+                    false,
+                    0.0
+                );
+
+                key_text.set_string(&format!("{letter}"));
+                key_text.set_position(Vector2f::new(
+                    xpos - glyph.advance()/2.0,
+                    ypos,
+                ));
+                texture.draw(&key_text);
+            }
+        }
+    }
+
     // Now save this texture as the answer key image.
+
+    texture.display();
+
+    let base_image = texture
+        .texture()
+        .copy_to_image()
+        .expect("failed to copy texture to image");
+
+    let mut cropped_image = Image::new_solid(max_x_drawn as _, max_y_drawn as _, Color::WHITE)
+        .expect("failed to create cropping image");
+    
+    cropped_image.copy_image(
+        &base_image,
+        0,
+        0,
+        IntRect::new(0, 0, max_x_drawn as _, max_y_drawn as _),
+        false
+    );
+
+    cropped_image
+        .save_to_file("answer_key.png")
+        .expect("failed to save image file");
 }
 
 // Draw utilities.
