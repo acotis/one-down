@@ -119,7 +119,7 @@ fn main() {
     texture.clear(Color::WHITE);
 
     let mut number_text = Text::new(&String::new(), &deja_regular, 0);
-    let number_size = 30.0;
+    let number_size = 35.0;
 
     number_text.set_fill_color(Color::rgb(0, 0, 0));
     number_text.set_character_size(number_size as u32);
@@ -143,8 +143,8 @@ fn main() {
 
             if let Some(number) = board[y][x].number {
                 number_text.set_position(Vector2f::new(
-                    xpos - scale * 0.4,
-                    ypos - scale * 0.28,
+                    xpos - scale * 0.41,
+                    ypos - scale * 0.27,
                 ));
                 number_text.set_string(&format!("{number}"));
                 texture.draw(&number_text);
