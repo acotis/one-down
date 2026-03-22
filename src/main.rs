@@ -135,7 +135,7 @@ fn main() {
 
     // Draw the clues.
 
-    let x = scale * (width as f32 + 0.96);
+    let x = scale * (width as f32 + 1.0);
     let mut y = scale * 0.8;
     let mut lora_text = Text::new(&String::new(), &lora, 0);
     let mut deja_text = Text::new(&String::new(), &deja, 0);
@@ -209,7 +209,7 @@ fn main() {
             texture.draw(&lora_text);
 
             max_x_drawn = max_x_drawn.max(
-                x + number_gap + lora_text.local_bounds().width + scale * 0.45
+                x + number_gap + lora_text.local_bounds().width + scale * 0.5
             );
 
             max_y_drawn = max_y_drawn.max(
