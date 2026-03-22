@@ -139,13 +139,14 @@ fn main() {
     let mut y = scale * 0.8;
     let mut lora_text = Text::new(&String::new(), &lora, 0);
     let mut deja_text = Text::new(&String::new(), &deja, 0);
-    let lora_size = 40.0; //self.dimensions.tile_size() * 0.5;
+    let lora_size = 45.0; //self.dimensions.tile_size() * 0.5;
     let line_gap = 50.0;
     let lora_gap = 60.0;
     let deja_size = 55.0;
     let deja_gap = 82.5;
     let skip_gap = 36.0;
-    let number_gap = 60.0;
+    let number_gap = 65.0;
+    let deja_x_offset = 4.0;
 
     lora_text.set_fill_color(Color::BLACK);
     lora_text.set_character_size(lora_size as u32);
@@ -166,7 +167,7 @@ fn main() {
 
     for c in 0..across_count+down_count {
         if c == 0 {
-            deja_text.set_position(Vector2f::new(x, y));
+            deja_text.set_position(Vector2f::new(x - deja_x_offset, y));
             deja_text.set_string("Across");
             texture.draw(&deja_text);
             y += deja_gap;
@@ -174,7 +175,7 @@ fn main() {
 
         if c == across_count {
             y += skip_gap;
-            deja_text.set_position(Vector2f::new(x, y));
+            deja_text.set_position(Vector2f::new(x - deja_x_offset, y));
             deja_text.set_string("Down");
             texture.draw(&deja_text);
             y += deja_gap;
@@ -208,7 +209,7 @@ fn main() {
             texture.draw(&lora_text);
 
             max_x_drawn = max_x_drawn.max(
-                x + number_gap + lora_text.local_bounds().width + scale * 0.4
+                x + number_gap + lora_text.local_bounds().width + scale * 0.45
             );
 
             max_y_drawn = max_y_drawn.max(
