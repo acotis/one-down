@@ -133,7 +133,7 @@ fn main() {
     // Create the text objects that will be used to draw text.
 
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
-    let lora = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
+    //let lora_bold = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
     let dejavusans = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
     let dejavusans_bold = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
     let dejavusans_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
