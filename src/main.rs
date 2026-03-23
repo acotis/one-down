@@ -133,7 +133,7 @@ fn main() {
     // Create the text objects that will be used to draw text.
 
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
-    let lora_bold = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
+    let lora = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
     let dejavusans = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
     let dejavusans_bold = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
     let dejavusans_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
@@ -208,7 +208,7 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ")], word_lengths: vec![word.len()]}];
+        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()], word_lengths: vec![word.len()]}];
 
         let (clue_vec, clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
