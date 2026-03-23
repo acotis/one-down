@@ -34,6 +34,10 @@ fn main() {
     let input = std::fs::read_to_string(&arg).expect("couldn't open puzzle.txt");
 
     for line in input.lines() {
+        if line.contains("%%%") {
+            break;
+        }
+
         if let Some((left_raw, right)) = line.split_once(":") {
             let left = left_raw.to_uppercase();
 
