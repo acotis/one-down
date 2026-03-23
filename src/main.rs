@@ -107,21 +107,23 @@ fn main() {
 
     // Define render constants.
 
-    let scale: f32 = 128.0; // Side length of each cell in pixels.
+    let scale: f32 = 384.0; // Side length of each cell in pixels.
 
-    let clue_text_size = 40; //self.dimensions.tile_size() * 0.5;
-    let clue_line_height = 50.0;
-    let clue_sep = 60.0;
-    let header_text_size = 55;
-    let header_line_height = 82.5;
-    let section_sep = 32.0;
-    let number_gap = 65.0;
-    let header_dedent = 4.0;
+    let clue_text_size = 120;
+    let header_text_size = 165;
+    let number_size = 105;
+    let key_size = 210;
+    let title_size = 120;
 
-    let number_size = 35;
-    let key_size = 70;
-    let title_size = 40;
-    let title_gap = 55.0;
+    let clue_line_height = 150.0;
+    let header_line_height = 247.5;
+    let title_line_height = 165.0;
+
+    let clue_sep = 180.0;
+    let section_sep = 96.0;
+
+    let clue_text_indent = 195.0;
+    let header_dedent = 12.0;
 
     // Create the text objects that will be used to draw text.
 
@@ -138,7 +140,7 @@ fn main() {
 
     // Draw the board.
 
-    let mut texture = RenderTexture::new(4096, 4096)
+    let mut texture = RenderTexture::new(8192, 8192)
         .expect("could not create render texture");
 
     texture.clear(Color::WHITE);
@@ -225,12 +227,12 @@ fn main() {
                 line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
             }
 
-            clue_text.set_position(Vector2f::new(x + number_gap, y));
+            clue_text.set_position(Vector2f::new(x + clue_text_indent, y));
             clue_text.set_string(&line);
             texture.draw(&clue_text);
 
             max_x_drawn = max_x_drawn.max(
-                x + number_gap + clue_text.local_bounds().width + scale * 0.5
+                x + clue_text_indent + clue_text.local_bounds().width + scale * 0.5
             );
 
             max_y_drawn = max_y_drawn.max(
@@ -243,7 +245,6 @@ fn main() {
         y += clue_sep - clue_line_height;
 
         //clue_text.set_string(&format!("{number}. {}", clue.lines[0]));
-
     }
 
     // Draw the title and author if there are any.
@@ -260,7 +261,7 @@ fn main() {
             y + title_text.local_bounds().height + scale * 0.3
         );
 
-        y += title_gap;
+        y += title_line_height;
     }
 
     if let Some(author) = author {
@@ -273,7 +274,7 @@ fn main() {
             y + title_text.local_bounds().height + scale * 0.3
         );
 
-        //y += title_gap;
+        //y += title_line_height;
     }
 
     // Save this texture as the puzzle image.
@@ -305,7 +306,7 @@ fn main() {
     for y in 0..height {
         for x in 0..width {
             let xpos = scale * (1.00 + x as f32);
-            let ypos = scale * (1.08 + y as f32);
+            let ypos = scale * (1.00 + y as f32);
 
             if let Some(letter) = board[y][x].letter {
                 let letter = letter.to_ascii_uppercase();
