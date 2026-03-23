@@ -133,6 +133,7 @@ fn main() {
     // Create the text objects that will be used to draw text.
 
     let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
+    let lora_bold = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
     let dejavusans = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
     let dejavusans_bold = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
     let dejavusans_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
@@ -207,12 +208,12 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let mut default = vec![Clue {lines: vec![format!("—")], word_lengths: vec![]}];
+        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ")], word_lengths: vec![word.len()]}];
 
-        let clue_vec = if word.contains(' ') {
-            &mut default
+        let (clue_vec, clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
+            (clue_vec, Color::BLACK, &lora)
         } else {
-            clue_texts.get_mut(&word.to_uppercase()).expect(&format!("no clue entry for {word}"))
+            (&mut default, Color::rgb(255, 0, 0), &dejavusans_bold)
         };
 
         if clue_vec.is_empty() {
@@ -224,6 +225,11 @@ fn main() {
         clue_text.set_position(Vector2f::new(x + clue_indent, y));
         clue_text.set_string(&format!("{number}."));
         texture.draw(&clue_text);
+
+        let old_clue_color = clue_text.fill_color();
+        let old_clue_font = clue_text.font().unwrap();
+        clue_text.set_fill_color(clue_color);
+        clue_text.set_font(clue_font);
 
         for i in 0..clue.lines.len() {
             let mut line = format!("{}", clue.lines[i]);
@@ -247,6 +253,8 @@ fn main() {
             y += clue_line_height;
         }
 
+        clue_text.set_fill_color(old_clue_color);
+        clue_text.set_font(old_clue_font);
         y += clue_sep - clue_line_height;
 
         //clue_text.set_string(&format!("{number}. {}", clue.lines[0]));
