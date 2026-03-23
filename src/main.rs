@@ -115,14 +115,15 @@ fn main() {
     let key_size = 210;
     let title_size = 120;
 
-    let clue_line_height = 150.0;
+    let clue_line_height = 140.0;
     let header_line_height = 247.5;
     let title_line_height = 165.0;
 
     let clue_sep = 180.0;
-    let section_sep = 96.0;
+    let section_sep = 90.0;
 
-    let clue_text_indent = 195.0;
+    let clue_indent = 50.0;
+    let clue_content_indent = 195.0;
     let header_dedent = 12.0;
 
     // Create the text objects that will be used to draw text.
@@ -216,7 +217,7 @@ fn main() {
 
         let clue = clue_vec.remove(0);
 
-        clue_text.set_position(Vector2f::new(x, y));
+        clue_text.set_position(Vector2f::new(x + clue_indent, y));
         clue_text.set_string(&format!("{number}."));
         texture.draw(&clue_text);
 
@@ -227,12 +228,12 @@ fn main() {
                 line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
             }
 
-            clue_text.set_position(Vector2f::new(x + clue_text_indent, y));
+            clue_text.set_position(Vector2f::new(x + clue_content_indent + clue_indent, y));
             clue_text.set_string(&line);
             texture.draw(&clue_text);
 
             max_x_drawn = max_x_drawn.max(
-                x + clue_text_indent + clue_text.local_bounds().width + scale * 0.5
+                x + clue_indent + clue_content_indent + clue_text.local_bounds().width + scale * 0.5
             );
 
             max_y_drawn = max_y_drawn.max(
