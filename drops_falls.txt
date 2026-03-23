@@ -1,8 +1,8 @@
 
-— — — — — D — . S
-. . — . . O . . P
-E — — — . Z O N E
-R . — . . E . . L
+— — W — — D — . S
+. . H . . O . . P
+E X I T . Z O N E
+R . R . . E . . L
 O . R A I N S . U
 S . . — . . — . N
 I — — — . B U C K
@@ -18,6 +18,8 @@ ZONE: Nice! Large portion of ozone hole closed
 BUCK: Throw a green one
 EROSION: Love varied atoms, but not sulphur corrosion
 SPELUNK: Throw elk puns out in cave
+EXIT: Leave old boyfriend's crap behind
+WHIRR: Upends jar for martini peach? Now we're talking!
 
 %%%%%%%%%%%%%%%%%%%%
 
@@ -25,12 +27,34 @@ SPELUNK: Throw elk puns out in cave
 Todo
 ——————————
 
-consider if "corrision" in EROSION can be made more discrete, or more fair
+consider if "corrosion" in EROSION can be made more discrete, or more fair
 consider if the SPELUNK clue could be better (the story sucks right now)
+make WHIRR clue even better
 
 ——————————
 Ideas
 ——————————
+
+WHIRR
+
+Upends
+...r // boxer thriller toaster folder container canister jar
+for
+...i // alibi abici bikini chili deli emoji ennui graffiti hibachi khaki mariachi martini mini origami
+rebirth? // math overreach patch peach perch photograph pinch pitch punch sixth sleigh
+Now we're talking!
+
+Upends
+...
+for
+ravioli
+dough?
+Now we're talking!
+
+EXIT
+
+Leave it to my last boyfriend :eye_roll:
+    — Is "to" an acceptable appendage inticator?
 
 RAINS
 
