@@ -1,6 +1,7 @@
 
 use std::collections::HashMap;
 use sfml::system::Vector2f;
+use sfml::cpp::FBox;
 
 use sfml::graphics::*;
 use sfml::system::Vector2;
@@ -106,12 +107,34 @@ fn main() {
 
     // Define render constants.
 
-    let deja = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu font");
-    let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
-    let deja_regular = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu font");
-    let deja_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu font");
-
     let scale: f32 = 128.0; // Side length of each cell in pixels.
+
+    let clue_text_size = 40; //self.dimensions.tile_size() * 0.5;
+    let clue_line_height = 50.0;
+    let clue_sep = 60.0;
+    let header_text_size = 55;
+    let header_line_height = 82.5;
+    let section_sep = 32.0;
+    let number_gap = 65.0;
+    let header_dedent = 4.0;
+
+    let number_size = 35;
+    let key_size = 70;
+    let title_size = 40;
+    let title_gap = 55.0;
+
+    // Create the text objects that will be used to draw text.
+
+    let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
+    let dejavusans = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
+    let dejavusans_bold = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
+    let dejavusans_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
+
+    let mut number_text = create_text(&dejavusans,      number_size,        Color::BLACK);
+    let mut clue_text   = create_text(&lora,            clue_text_size,     Color::BLACK);
+    let mut header_text = create_text(&dejavusans_bold, header_text_size,   Color::BLACK);
+    let mut title_text  = create_text(&dejavusans_bold, title_size,         Color::BLACK);
+    let mut key_text    = create_text(&dejavusans_bold, key_size,           Color::rgb(0, 0, 255));
 
     // Draw the board.
 
@@ -119,16 +142,6 @@ fn main() {
         .expect("could not create render texture");
 
     texture.clear(Color::WHITE);
-
-    let mut number_text = Text::new(&String::new(), &deja_regular, 0);
-    let number_size = 35.0;
-
-    number_text.set_fill_color(Color::rgb(0, 0, 0));
-    number_text.set_character_size(number_size as u32);
-    number_text.set_origin(sfml::system::Vector2f::new(
-        0.0, //glyph.advance() / 2.0,
-        number_size * 0.615,
-    ));
 
     for y in 0..height {
         for x in 0..width {
@@ -161,48 +174,24 @@ fn main() {
 
     let mut x = scale * (width as f32 + 1.05);
     let mut y = scale * 0.75;
-    let mut lora_text = Text::new(&String::new(), &lora, 0);
-    let mut deja_text = Text::new(&String::new(), &deja, 0);
-    let lora_size = 40.0; //self.dimensions.tile_size() * 0.5;
-    let line_gap = 50.0;
-    let lora_gap = 60.0;
-    let deja_size = 55.0;
-    let deja_gap = 82.5;
-    let skip_gap = 32.0;
-    let number_gap = 65.0;
-    let deja_x_offset = 4.0;
-
-    lora_text.set_fill_color(Color::BLACK);
-    lora_text.set_character_size(lora_size as u32);
-    lora_text.set_origin(sfml::system::Vector2f::new(
-        0.0, //glyph.advance() / 2.0,
-        lora_size * 0.615,
-    ));
-
-    deja_text.set_fill_color(Color::BLACK);
-    deja_text.set_character_size(deja_size as u32);
-    deja_text.set_origin(sfml::system::Vector2f::new(
-        0.0, //glyph.advance() / 2.0,
-        deja_size * 0.615,
-    ));
 
     let across_count = across_words.len();
     let down_count = down_words.len();
 
     for c in 0..across_count+down_count {
         if c == 0 {
-            deja_text.set_position(Vector2f::new(x - deja_x_offset, y));
-            deja_text.set_string("Across");
-            texture.draw(&deja_text);
-            y += deja_gap;
+            header_text.set_position(Vector2f::new(x - header_dedent, y));
+            header_text.set_string("Across");
+            texture.draw(&header_text);
+            y += header_line_height;
         }
 
         if c == across_count {
-            y += skip_gap;
-            deja_text.set_position(Vector2f::new(x - deja_x_offset, y));
-            deja_text.set_string("Down");
-            texture.draw(&deja_text);
-            y += deja_gap;
+            y += section_sep;
+            header_text.set_position(Vector2f::new(x - header_dedent, y));
+            header_text.set_string("Down");
+            texture.draw(&header_text);
+            y += header_line_height;
         }
 
         let (number, word) = if c < across_count {
@@ -225,9 +214,9 @@ fn main() {
 
         let clue = clue_vec.remove(0);
 
-        lora_text.set_position(Vector2f::new(x, y));
-        lora_text.set_string(&format!("{number}."));
-        texture.draw(&lora_text);
+        clue_text.set_position(Vector2f::new(x, y));
+        clue_text.set_string(&format!("{number}."));
+        texture.draw(&clue_text);
 
         for i in 0..clue.lines.len() {
             let mut line = format!("{}", clue.lines[i]);
@@ -236,24 +225,24 @@ fn main() {
                 line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
             }
 
-            lora_text.set_position(Vector2f::new(x + number_gap, y));
-            lora_text.set_string(&line);
-            texture.draw(&lora_text);
+            clue_text.set_position(Vector2f::new(x + number_gap, y));
+            clue_text.set_string(&line);
+            texture.draw(&clue_text);
 
             max_x_drawn = max_x_drawn.max(
-                x + number_gap + lora_text.local_bounds().width + scale * 0.5
+                x + number_gap + clue_text.local_bounds().width + scale * 0.5
             );
 
             max_y_drawn = max_y_drawn.max(
-                y + lora_text.local_bounds().height + scale * 0.3
+                y + clue_text.local_bounds().height + scale * 0.3
             );
 
-            y += line_gap;
+            y += clue_line_height;
         }
 
-        y += lora_gap - line_gap;
+        y += clue_sep - clue_line_height;
 
-        //lora_text.set_string(&format!("{number}. {}", clue.lines[0]));
+        //clue_text.set_string(&format!("{number}. {}", clue.lines[0]));
 
     }
 
@@ -261,17 +250,6 @@ fn main() {
 
     x = scale * 0.5;
     y = scale * (height as f32 + 1.08);
-
-    let mut title_text = Text::new(&String::new(), &deja, 0);
-    let title_size = 40.0;
-    let title_gap = 55.0;
-
-    title_text.set_fill_color(Color::BLACK);
-    title_text.set_character_size(title_size as u32);
-    title_text.set_origin(sfml::system::Vector2f::new(
-        0.0, //glyph.advance() / 2.0,
-        title_size * 0.615,
-    ));
 
     if let Some(title) = title {
         title_text.set_position(Vector2f::new(x, y));
@@ -286,7 +264,7 @@ fn main() {
     }
 
     if let Some(author) = author {
-        title_text.set_font(&deja_italic);
+        title_text.set_font(&dejavusans_italic);
         title_text.set_position(Vector2f::new(x, y));
         title_text.set_string(&author);
         texture.draw(&title_text);
@@ -324,16 +302,6 @@ fn main() {
 
     // Add in the answers.
 
-    let mut key_text = Text::new(&String::new(), &deja, 0);
-    let key_size = 70.0;
-
-    key_text.set_fill_color(Color::rgb(0, 0, 255));
-    key_text.set_character_size(key_size as u32);
-    key_text.set_origin(sfml::system::Vector2f::new(
-        0.0, //glyph.advance() / 2.0,
-        key_size * 0.615,
-    ));
-
     for y in 0..height {
         for x in 0..width {
             let xpos = scale * (1.00 + x as f32);
@@ -341,7 +309,7 @@ fn main() {
 
             if let Some(letter) = board[y][x].letter {
                 let letter = letter.to_ascii_uppercase();
-                let glyph = deja.glyph(
+                let glyph = dejavusans_bold.glyph(
                     letter as u32,
                     key_size as u32,
                     false,
@@ -414,5 +382,17 @@ fn draw_polygon(
     cs.set_outline_thickness(outline_thickness);
     cs.set_outline_color(outline_color);
     texture.draw(&cs);
+}
+
+// Create a text object.
+
+fn create_text(font: &FBox<Font>, size: u32, color: Color) -> Text<'_> {
+    let mut ret = Text::new("", &font, size);
+    ret.set_fill_color(color);
+    ret.set_origin(sfml::system::Vector2f::new(
+        0.0, //glyph.advance() / 2.0,
+        size as f32 * 0.615,
+    ));
+    ret
 }
 
