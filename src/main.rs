@@ -56,7 +56,7 @@ fn main() {
             }
         } else {
             if line.trim() != "" {
-                board.push(line.chars().filter(|c| *c != ' ').map(|c| Cell {letter: if c == '.' {None} else {Some(c)}, number: None}).collect());
+                board.push(line.chars().filter(|c| *c != ' ').map(|c| Cell {letter: match c {'.' => None, c if !c.is_ascii_alphabetic() => Some(' '), c => Some(c)}, number: None}).collect());
             }
         }
     }
@@ -82,7 +82,7 @@ fn main() {
 
                 across_words.push((
                     board[y][x].number.unwrap(),
-                    (x..width).map_while(|x| board[y][x].letter).collect()
+                    (x..width).map_while(|x| board[y][x].letter).collect::<String>().to_uppercase()
                 ));
             }
 
@@ -98,7 +98,7 @@ fn main() {
 
                 down_words.push((
                     board[y][x].number.unwrap(),
-                    (y..height).map_while(|y| board[y][x].letter).collect()
+                    (y..height).map_while(|y| board[y][x].letter).collect::<String>().to_uppercase()
                 ));
             }
         }
@@ -211,10 +211,18 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let clue_vec = clue_texts.get_mut(&word.to_uppercase()).expect(&format!("no clue entry for {word}"));
+        let mut default = vec![Clue {lines: vec![format!("—")], word_lengths: vec![]}];
+
+        let clue_vec = if word.contains(' ') {
+            &mut default
+        } else {
+            clue_texts.get_mut(&word.to_uppercase()).expect(&format!("no clue entry for {word}"))
+        };
+
         if clue_vec.is_empty() {
             panic!("ran out of clue entries for {word}");
         }
+
         let clue = clue_vec.remove(0);
 
         lora_text.set_position(Vector2f::new(x, y));
@@ -224,7 +232,7 @@ fn main() {
         for i in 0..clue.lines.len() {
             let mut line = format!("{}", clue.lines[i]);
 
-            if i == clue.lines.len()-1 {
+            if i == clue.lines.len()-1 && !clue.word_lengths.is_empty() {
                 line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
             }
 
