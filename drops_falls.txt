@@ -1,13 +1,13 @@
 
 — — — — — D — . S
 . . — . . O . . P
-— — — — . Z O N E
-— . — . . E . . L
-— . R A I N S . U
-— . . — . . — . N
-— — — — . B U C K
-— . . — . . — . .
-— . — — — — — — —
+E — — — . Z O N E
+R . — . . E . . L
+O . R A I N S . U
+S . . — . . — . N
+I — — — . B U C K
+O . . — . . — . .
+N . — — — — — — —
 
 @Title: Drops, falls
 @Author: Fire
@@ -16,12 +16,15 @@ RAINS: Locomotive's caboose drops, falls
 DOZEN: 500 + 0 + 0 - 0 - R + 0 - 1 = 8 + 4
 ZONE: Nice! Large portion of ozone hole closed
 BUCK: Throw a green one
+EROSION: Love varied atoms, but not sulphur corrosion
 
 %%%%%%%%%%%%%%%%%%%%
 
 ——————————
 Todo
 ——————————
+
+consider if "corrision" in EROSION can be made more discrete
 
 ——————————
 Ideas
