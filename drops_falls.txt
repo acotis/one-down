@@ -17,6 +17,7 @@ DOZEN: 500 + 0 + 0 - 0 - R + 0 - 1 = 8 + 4
 ZONE: Nice! Large portion of ozone hole closed
 BUCK: Throw a green one
 EROSION: Love varied atoms, but not sulphur corrosion
+SPELUNK: Throw elk puns out in cave
 
 %%%%%%%%%%%%%%%%%%%%
 
@@ -24,7 +25,8 @@ EROSION: Love varied atoms, but not sulphur corrosion
 Todo
 ——————————
 
-consider if "corrision" in EROSION can be made more discrete
+consider if "corrision" in EROSION can be made more discrete, or more fair
+consider if the SPELUNK clue could be better (the story sucks right now)
 
 ——————————
 Ideas

@@ -213,7 +213,7 @@ fn main() {
         let (clue_vec, clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
         } else {
-            (&mut default, Color::rgb(255, 0, 0), &dejavusans_bold)
+            (&mut default, Color::rgb(240, 0, 0), &dejavusans_bold)
         };
 
         if clue_vec.is_empty() {
