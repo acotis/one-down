@@ -19,7 +19,7 @@ ZONE: Nice! Large portion of ozone hole closed
 BUCK: One throw
 EROSION: Wearing down — love varied atoms, but NOT sulphur
 SPELUNK: Throw elk puns out in cave
-WHIRR: Upends jar for martini peach? Now we're talking!
+WHIRR: Upends hamburger for martini photograph? Now we're talking!
 EXIT: Out to stick it to an old boyfriend
 ALIBI: Takes a bit of a drive to get where you were
 INTI (3, 1): Declaration from intelligence organization
@@ -33,7 +33,6 @@ SOWINDY (2, 5): Remark on gusts of air blowing snowy ID around
 Todo
 ——————————
 
-make WHIRR clue even better
 consider replacing "tiny airplanes" with "buggy fliers" or something
 
 ——————————
@@ -44,6 +43,7 @@ consider putting "sulphur corrosion" back how it was
 consider if the SPELUNK clue could be better (the story sucks right now)
 for SOUND, consider "full of" or "takes on"
 consider "Throw a greenback" or "Throw a green back"
+make WHIRR clue even better
 
 ——————————
 Ideas
@@ -72,6 +72,8 @@ A drive shows where you were
 A drive gets to where you were
 
 WHIRR
+
+Upends jar for martini peach? Now we're talking!
 
 Upends
 ...r // boxer thriller toaster folder container canister jar
