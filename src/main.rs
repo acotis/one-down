@@ -24,6 +24,7 @@ fn main() {
     let mut board: Vec<Vec<Cell>> = vec![];
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
+    let mut flat_title: bool = false;
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
     let mut down_words: Vec<(usize, String)> = vec![];
@@ -36,6 +37,11 @@ fn main() {
     for line in input.lines() {
         if line.contains("%%%") {
             break;
+        }
+
+        if line.trim().to_uppercase() == "@FLAT-TITLE" {
+            flat_title = true;
+            continue;
         }
 
         if let Some((left_raw, right)) = line.split_once(":") {
@@ -262,32 +268,68 @@ fn main() {
 
     // Draw the title and author if there are any.
 
-    x = scale * 0.5;
-    y = scale * (height as f32 + 1.08);
+    if !flat_title {
+        x = scale * 0.5;
+        y = scale * (height as f32 + 1.08);
 
-    if let Some(title) = title {
-        title_text.set_position(Vector2f::new(x, y));
-        title_text.set_string(&title);
-        texture.draw(&title_text);
+        if let Some(title) = title {
+            title_text.set_position(Vector2f::new(x, y));
+            title_text.set_string(&title);
+            texture.draw(&title_text);
 
-        max_y_drawn = max_y_drawn.max(
-            y + title_text.local_bounds().height + scale * 0.3
-        );
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.3
+            );
 
-        y += title_line_height;
-    }
+            y += title_line_height;
+        }
 
-    if let Some(author) = author {
-        title_text.set_font(&dejavusans_italic);
-        title_text.set_position(Vector2f::new(x, y));
-        title_text.set_string(&author);
-        texture.draw(&title_text);
+        if let Some(author) = author {
+            title_text.set_font(&dejavusans_italic);
+            title_text.set_position(Vector2f::new(x, y));
+            title_text.set_string(&author);
+            texture.draw(&title_text);
 
-        max_y_drawn = max_y_drawn.max(
-            y + title_text.local_bounds().height + scale * 0.3
-        );
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.3
+            );
 
-        //y += title_line_height;
+            //y += title_line_height;
+        }
+    } else {
+        y = scale * (height as f32 + 0.9);
+
+        if let Some(title) = title {
+            x = scale * 0.44;
+
+            title_text.set_position(Vector2f::new(x, y));
+            title_text.set_string(&title);
+            texture.draw(&title_text);
+
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.2
+            );
+
+            title_text.set_string(&(title + "  "));
+            x += title_text.local_bounds().width;
+        }
+
+        if let Some(author) = author {
+            title_text.set_font(&dejavusans_italic);
+            title_text.set_string("—");
+            title_text.set_position(Vector2f::new(x, y));
+            texture.draw(&title_text);
+
+            x += title_text.local_bounds().width * 1.3;
+
+            title_text.set_string(&author);
+            title_text.set_position(Vector2f::new(x, y));
+            texture.draw(&title_text);
+
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.2
+            );
+        }
     }
 
     // Save this texture as the puzzle image.

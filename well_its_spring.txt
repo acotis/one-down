@@ -10,13 +10,14 @@ cosplay.
 
 @Title: Well, it's Spring
 @Author: Rain & Wheel
+@Flat-Title
 
 antenna: Receiver, and not transmitter, encouraged \ notating names as initials
 remit: Send back money to turn back clock
-atom: Data to migrate contains a little bit of \ everything
+atom: Data to migrate contains a little bit of everything
 hdmi: Some kind of signal? Private communication \ hidden in greeting
 taste: Good judgment comes from altered state
-cosplay: Disguise oneself, like Odysseus tricking \ Calypso
+cosplay: Disguise oneself, like Odysseus tricking Calypso
 
 term: Something added in bitter Manhattan
 nomad: Rover is soaring martian star
