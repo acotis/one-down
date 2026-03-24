@@ -24,7 +24,7 @@ EXIT: Out to stick it to an old boyfriend
 ALIBI: Takes a bit of a drive to get where you were
 INTI (3, 1): Declaration from intelligence organization
 CICADAS: Produce such a loud buzzing sound for such tiny airplanes
-SOUND: Beep! Memory card takes on new contents
+SOUND: Beep! Memory card loads up new contents
 SOWINDY (2, 5): Remark on gusts of air blowing snowy ID around
 
 %%%%%%%%%%%%%%%%%%%%
@@ -35,7 +35,7 @@ Todo
 
 make WHIRR clue even better
 consider "Throw a greenback" or "Throw a green back"
-for SOUND, consider "full of" instead of "takes on"
+for SOUND, consider "full of" or "takes on"
 consider replacing "tiny airplanes" with "buggy fliers" or something
 
 ——————————
