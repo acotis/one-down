@@ -24,7 +24,7 @@ WHIRR: Upends hamburger for martini photograph? Now we're talking!
 EXIT: Out to stick it to an old boyfriend
 ALIBI: Takes a bit of a drive to get where you were
 INTI (3, 1): Declaration from intelligence organization
-CICADAS: Produce such a loud buzzing sound for such tiny airplanes
+CICADAS: Tiny nature flyers produce such a loud, iconic buzzing sound
 SOUND: Beep! Memory card loads up new contents
 SOWINDY (2, 5): Remark on gusts of air blowing snowy ID around
 
@@ -33,8 +33,6 @@ SOWINDY (2, 5): Remark on gusts of air blowing snowy ID around
 ——————————
 Todo
 ——————————
-
-consider replacing "tiny airplanes" with "buggy fliers" or something
 
 ——————————
 Done
@@ -45,6 +43,8 @@ consider if the SPELUNK clue could be better (the story sucks right now)
 for SOUND, consider "full of" or "takes on"
 consider "Throw a greenback" or "Throw a green back"
 make WHIRR clue even better
+consider replacing "tiny airplanes" with "buggy fliers" or something
+finish CICADAS clue
 
 ——————————
 Ideas
