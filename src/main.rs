@@ -61,7 +61,7 @@ fn main() {
                          .or_insert(vec![])
                          .push(Clue {
                              lines: right.replace("'", "’").trim().split("\\").map(str::trim).map(str::to_owned).collect(),
-                             word_lengths: if !lengths.is_empty() {lengths.iter().flat_map(|s|s.parse()).collect()} else {vec![word.trim().len()]}
+                             word_lengths: if !lengths.is_empty() {lengths.iter().flat_map(|s|s.trim().parse()).collect()} else {vec![word.trim().len()]}
                          });
                 }
             }
