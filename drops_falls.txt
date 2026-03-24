@@ -4,10 +4,10 @@
 E X I T . Z O N E
 R . R . . E . . L
 O . R A I N S . U
-S . . — . . — . N
-I — — — . B U C K
-O . . — . . — . .
-N . — — — — — — —
+S . . L . . O . N
+I N T I . B U C K
+O . . B . . N . .
+N . C I C A D A S
 
 @Title: Drops, falls
 @Author: Fire
@@ -18,8 +18,12 @@ ZONE: Nice! Large portion of ozone hole closed
 BUCK: Throw a green one
 EROSION: Love varied atoms, but not sulphur corrosion
 SPELUNK: Throw elk puns out in cave
-EXIT: Leave old boyfriend's crap behind
 WHIRR: Upends jar for martini peach? Now we're talking!
+EXIT: Out to stick it to an old boyfriend
+ALIBI: Took a drive to get to where you were
+INTI (3, 1): Declaration from intelligence organization
+CICADAS: Produce such a loud buzzing sound for such tiny airplanes
+SOUND: Beep! Memory card takes on new contents
 
 %%%%%%%%%%%%%%%%%%%%
 
@@ -30,10 +34,31 @@ Todo
 consider if "corrosion" in EROSION can be made more discrete, or more fair
 consider if the SPELUNK clue could be better (the story sucks right now)
 make WHIRR clue even better
+figure out if ALIBI is fair
+consider "Throw a greenback" or "Throw a green back"
+for SOUND, consider "full of" instead of "takes on"
 
 ——————————
 Ideas
 ——————————
+
+CICADAS
+
+Produce such a loud buzzing sound for such small airplanes
+
+UNWINDS
+
+United Nations turns in
+
+INTI
+
+Declaration of intelligence [I]
+Declaration from intelligence institute
+
+ALIBI
+
+A drive shows where you were
+A drive gets to where you were
 
 WHIRR
 
@@ -41,7 +66,7 @@ Upends
 ...r // boxer thriller toaster folder container canister jar
 for
 ...i // alibi abici bikini chili deli emoji ennui graffiti hibachi khaki mariachi martini mini origami
-rebirth? // math overreach patch peach perch photograph pinch pitch punch sixth sleigh
+rebirth? // math overreach patch peach perch photograph pinch pitch punch sixth sleigh smooch smooth
 Now we're talking!
 
 Upends
@@ -55,6 +80,9 @@ EXIT
 
 Leave it to my last boyfriend :eye_roll:
     — Is "to" an acceptable appendage inticator?
+Leave old boyfriend's crap behind
+    — Doesn't work because "boyfriend's" has an S.
+Out to stick it to my old boyfriend
 
 RAINS
 
