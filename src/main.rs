@@ -12,9 +12,9 @@ struct Cell {
     number: Option<usize>,
 }
 
+#[derive(Clone)]
 struct Clue {
     lines: Vec<String>,
-    word_lengths: Vec<usize>,
 }
 
 fn main() {
@@ -52,16 +52,22 @@ fn main() {
                 "@AUTHOR" => {author = Some(right.trim().to_owned());}
                 _ => {
                     let [word, ref lengths@..] =
-                        left.split(['(',',',')'])
+                        left.split(['(',',',' ',')'])
+                            .filter(|bit| *bit != "")
                             .collect::<Vec<_>>()[..]
                     else {panic!()};
+
+                    let lengths_bit = if lengths.is_empty() {
+                        format!("({})", word.trim().len())
+                    } else {
+                        format!("({})", lengths.join(", "))
+                    };
 
                     clue_texts
                          .entry(word.trim().to_owned())
                          .or_insert(vec![])
                          .push(Clue {
-                             lines: right.replace("'", "’").trim().split("\\").map(str::trim).map(str::to_owned).collect(),
-                             word_lengths: if !lengths.is_empty() {lengths.iter().flat_map(|s|s.trim().parse()).collect()} else {vec![word.trim().len()]}
+                             lines: (right.replace("'", "’").trim().to_owned() + " " + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
                          });
                 }
             }
@@ -184,6 +190,23 @@ fn main() {
     let mut max_x_drawn = (width  as f32 + 1.0) * scale;
     let mut max_y_drawn = (height as f32 + 1.0) * scale;
 
+    // Pre-compute the max width of a clue line so that we can apply
+    // the user's requested horizontal squish amount.
+
+    let max_clue_line_length = across_words
+        .iter()
+        .chain(down_words.iter())
+        .map(|(cell, word)| word.clone()) // words
+        .flat_map(|word| clue_texts.get(&word)) // clue vecs
+        .flatten() // individual clues
+        .flat_map(|clue| &clue.lines) // individual lines
+        .map(|line| {
+            clue_text.set_string(&format!("{line}"));
+            clue_text.local_bounds().height
+        })
+        .fold(0.0, f32::max)
+        + 2550.0;
+
     // Draw the clues.
 
     let mut x = scale * (width as f32 + 1.05);
@@ -214,7 +237,7 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()], word_lengths: vec![word.len()]}];
+        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()]}];
 
         let (clue_vec, clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
@@ -237,26 +260,44 @@ fn main() {
         clue_text.set_fill_color(clue_color);
         clue_text.set_font(clue_font);
 
+        //println!("{} lines to consider", clue.lines.len());
+
         for i in 0..clue.lines.len() {
-            let mut line = format!("{}", clue.lines[i]);
+            let words = clue.lines[i].split(" ").collect::<Vec<_>>();
+            let mut line = format!("{}", words[0]);
 
-            if i == clue.lines.len()-1 && !clue.word_lengths.is_empty() {
-                line += &format!(" ({})", clue.word_lengths.iter().map(|len| format!("{len}")).collect::<Vec<_>>().join(", "));
+            //println!("{} words to consider", words.len());
+
+            for j in 1..=words.len() {
+                if j < words.len() {
+                    clue_text.set_string(&format!("{line} {}", words[j]));
+                }
+
+                if j == words.len() || clue_text.local_bounds().width > max_clue_line_length {
+                    clue_text.set_string(&line);
+                    clue_text.set_position(Vector2f::new(x + clue_content_indent + clue_indent, y));
+                    texture.draw(&clue_text);
+
+                    max_x_drawn = max_x_drawn.max(
+                        x + clue_indent + clue_content_indent + clue_text.local_bounds().width + scale * 0.5
+                    );
+
+                    max_y_drawn = max_y_drawn.max(
+                        y + clue_text.local_bounds().height + scale * 0.3
+                    );
+
+                    y += clue_line_height;
+                    line = format!("");
+                }
+
+                if j < words.len() {
+                    line = if line == "" {
+                        line + words[j]
+                    } else {
+                        line + " " + words[j]
+                    };
+                }
             }
-
-            clue_text.set_position(Vector2f::new(x + clue_content_indent + clue_indent, y));
-            clue_text.set_string(&line);
-            texture.draw(&clue_text);
-
-            max_x_drawn = max_x_drawn.max(
-                x + clue_indent + clue_content_indent + clue_text.local_bounds().width + scale * 0.5
-            );
-
-            max_y_drawn = max_y_drawn.max(
-                y + clue_text.local_bounds().height + scale * 0.3
-            );
-
-            y += clue_line_height;
         }
 
         clue_text.set_fill_color(old_clue_color);
