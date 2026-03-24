@@ -62,14 +62,14 @@ fn main() {
                     let lengths_bit = if lengths.is_empty() {
                         format!("({})", word.trim().len())
                     } else {
-                        format!("({})", lengths.join(", "))
+                        format!("({})", lengths.join(",\u{a0}"))
                     };
 
                     clue_texts
                          .entry(word.trim().to_owned())
                          .or_insert(vec![])
                          .push(Clue {
-                             lines: (right.replace("'", "’").trim().to_owned() + " " + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
+                             lines: (right.replace("'", "’").trim().to_owned() + "\u{a0}" + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
                          });
                 }
             }
@@ -198,7 +198,7 @@ fn main() {
     let max_clue_line_length = across_words
         .iter()
         .chain(down_words.iter())
-        .map(|(cell, word)| word.clone()) // words
+        .map(|(_cell, word)| word.clone()) // words
         .flat_map(|word| clue_texts.get(&word)) // clue vecs
         .flatten() // individual clues
         .flat_map(|clue| &clue.lines) // individual lines
