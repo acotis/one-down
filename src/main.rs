@@ -300,7 +300,7 @@ fn main() {
         y = scale * (height as f32 + 0.9);
 
         if let Some(title) = title {
-            x = scale * 0.44;
+            x = scale * 0.5;
 
             title_text.set_position(Vector2f::new(x, y));
             title_text.set_string(&title);
