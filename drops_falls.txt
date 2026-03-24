@@ -1,5 +1,5 @@
 
-— — W — — D — . S
+S O W I N D Y . S
 . . H . . O . . P
 E X I T . Z O N E
 R . R . . E . . L
@@ -11,12 +11,13 @@ N . C I C A D A S
 
 @Title: Drops, falls
 @Author: Fire
+@Flat-Title
 
 RAINS: Locomotive's caboose drops, falls
 DOZEN: 500 + 0 + 0 - 0 - R + 0 - 1 = 8 + 4
 ZONE: Nice! Large portion of ozone hole closed
 BUCK: Throw a green one
-EROSION: Love varied atoms, but not sulphur corrosion
+EROSION: Worn down — love varied atoms, but NOT sulphur
 SPELUNK: Throw elk puns out in cave
 WHIRR: Upends jar for martini peach? Now we're talking!
 EXIT: Out to stick it to an old boyfriend
@@ -24,6 +25,7 @@ ALIBI: Took a drive to get to where you were
 INTI (3, 1): Declaration from intelligence organization
 CICADAS: Produce such a loud buzzing sound for such tiny airplanes
 SOUND: Beep! Memory card takes on new contents
+SOWINDY (2, 5): Remark on gusts of air blowing snowy ID around
 
 %%%%%%%%%%%%%%%%%%%%
 
@@ -31,16 +33,21 @@ SOUND: Beep! Memory card takes on new contents
 Todo
 ——————————
 
-consider if "corrosion" in EROSION can be made more discrete, or more fair
+consider putting "sulphur corrosion" back how it was
 consider if the SPELUNK clue could be better (the story sucks right now)
 make WHIRR clue even better
 figure out if ALIBI is fair
 consider "Throw a greenback" or "Throw a green back"
 for SOUND, consider "full of" instead of "takes on"
+consider replacing "tiny airplanes" with "buggy fliers" or something
 
 ——————————
 Ideas
 ——————————
+
+SOWINDY
+
+Remark on air blowing snowy ID around
 
 CICADAS
 
