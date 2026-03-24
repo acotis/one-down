@@ -297,7 +297,7 @@ fn main() {
             //y += title_line_height;
         }
     } else {
-        y = scale * (height as f32 + 0.9);
+        y = scale * (height as f32 + 0.95);
 
         if let Some(title) = title {
             x = scale * 0.5;
