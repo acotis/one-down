@@ -12,6 +12,7 @@ N . C I C A D A S
 @Title: Drops, falls
 @Author: Fire
 @Flat-Title
+@X-Squish: 1000
 
 RAINS: Locomotive's caboose drops, falls
 DOZEN: 500 + 0 + 0 - 0 - R + 0 - 1 = 8 + 4

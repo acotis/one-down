@@ -25,6 +25,7 @@ fn main() {
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
     let mut flat_title: bool = false;
+    let mut squish: f32 = 0.0;
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
     let mut down_words: Vec<(usize, String)> = vec![];
@@ -50,6 +51,7 @@ fn main() {
             match &*left {
                 "@TITLE"  => {title  = Some(right.trim().to_owned());}
                 "@AUTHOR" => {author = Some(right.trim().to_owned());}
+                "@X-SQUISH" => {squish = right.trim().parse().unwrap();}
                 _ => {
                     let [word, ref lengths@..] =
                         left.split(['(',',',' ',')'])
@@ -202,10 +204,9 @@ fn main() {
         .flat_map(|clue| &clue.lines) // individual lines
         .map(|line| {
             clue_text.set_string(&format!("{line}"));
-            clue_text.local_bounds().height
+            clue_text.local_bounds().width
         })
-        .fold(0.0, f32::max)
-        + 2550.0;
+        .fold(0.0, f32::max) - squish;
 
     // Draw the clues.
 
