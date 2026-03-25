@@ -10,7 +10,7 @@ U M A D . . Y
 @Title: Up
 @Author: Fire
 @Flat-Title
-@X-Squish: 200
+@X-Squish: 600
 
 SMOL: Little, cute and silly!
 AMOK: Sounds like a decoy is acting wild?
