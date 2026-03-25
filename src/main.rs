@@ -75,10 +75,21 @@ fn main() {
             }
         } else {
             if line.trim() != "" {
-                board.push(line.chars().filter(|c| *c != ' ').map(|c| Cell {letter: match c {'.' => None, c if !c.is_ascii_alphabetic() => Some(' '), c => Some(c)}, number: None}).collect());
+                let row: Vec<Cell> = line.chars().filter(|c| *c != ' ').map(|c| Cell {letter: match c {'.' => None, c if !c.is_ascii_alphabetic() => Some(' '), c => Some(c)}, number: None}).collect();
+                if row.len() == 1 {
+                    //println!("{:?}", row[0].letter);
+                    //println!("*{line}*");
+                }
+                board.push(row);
             }
         }
     }
+
+    /*
+    for row in &board {
+        println!("line length: {}", row.len());
+    }
+    */
 
     let height = board.len();
     let width = board.iter().map(Vec::len).max().unwrap();
