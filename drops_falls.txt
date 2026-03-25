@@ -14,7 +14,7 @@ N . C I C A D A S
 @Flat-Title
 @X-Squish: 920
 
-RAINS: Locomotive's caboose drops, falls
+RAINS: Locomotive's conductor drops, falls
 DOZEN: 500 + 0 + 0 - 0 - R + 0 - 1 = 8 + 4
 ZONE: Nice! Large portion of ozone hole closed
 BUCK: One throw
