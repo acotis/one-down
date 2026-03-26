@@ -217,7 +217,7 @@ fn main() {
             clue_text.set_string(&format!("{line}"));
             clue_text.local_bounds().width
         })
-        .fold(0.0, f32::max) - squish;
+        .fold(1000.0, f32::max) - squish;
 
     // Draw the clues.
 
