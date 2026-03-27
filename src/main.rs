@@ -24,7 +24,7 @@ fn main() {
     let mut board: Vec<Vec<Cell>> = vec![];
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
-    let mut flat_title: bool = false;
+    let mut flat_title: bool = true;
     let mut squish: f32 = 0.0;
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
@@ -40,8 +40,8 @@ fn main() {
             break;
         }
 
-        if line.trim().to_uppercase() == "@FLAT-TITLE" {
-            flat_title = true;
+        if line.trim().to_uppercase() == "@TALL-TITLE" {
+            flat_title = false;
             continue;
         }
 
@@ -351,10 +351,9 @@ fn main() {
         }
     } else {
         y = scale * (height as f32 + 0.95);
+        x = scale * 0.5;
 
         if let Some(title) = title {
-            x = scale * 0.5;
-
             title_text.set_position(Vector2f::new(x, y));
             title_text.set_string(&title);
             texture.draw(&title_text);
