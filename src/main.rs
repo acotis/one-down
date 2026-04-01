@@ -25,7 +25,7 @@ fn main() {
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
     let mut flat_title: bool = true;
-    let mut squish: f32 = 0.0;
+    let mut max_clue_line_length: f32 = f32::MAX;
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
     let mut down_words: Vec<(usize, String)> = vec![];
@@ -51,7 +51,7 @@ fn main() {
             match &*left {
                 "@TITLE"  => {title  = Some(right.trim().to_owned());}
                 "@AUTHOR" => {author = Some(right.trim().to_owned());}
-                "@X-SQUISH" => {squish = right.trim().parse().unwrap();}
+                "@CLUE-WIDTH" => {max_clue_line_length = right.trim().parse().unwrap();}
                 _ => {
                     let [word, ref lengths@..] =
                         left.split(['(',',',' ',')'])
@@ -145,11 +145,11 @@ fn main() {
     let title_size = 120;
 
     let clue_line_height = 140.0;
-    let header_line_height = 247.5;
-    let title_line_height = 165.0;
+    let header_line_height = 260.0;
+    let title_line_height = 170.0;
 
     let clue_sep = 180.0;
-    let section_sep = 90.0;
+    let section_sep = 65.0;
 
     let clue_indent = 50.0;
     let clue_content_indent = 195.0;
@@ -202,22 +202,6 @@ fn main() {
 
     let mut max_x_drawn = (width  as f32 + 1.0) * scale;
     let mut max_y_drawn = (height as f32 + 1.0) * scale;
-
-    // Pre-compute the max width of a clue line so that we can apply
-    // the user's requested horizontal squish amount.
-
-    let max_clue_line_length = across_words
-        .iter()
-        .chain(down_words.iter())
-        .map(|(_cell, word)| word.clone()) // words
-        .flat_map(|word| clue_texts.get(&word)) // clue vecs
-        .flatten() // individual clues
-        .flat_map(|clue| &clue.lines) // individual lines
-        .map(|line| {
-            clue_text.set_string(&format!("{line}"));
-            clue_text.local_bounds().width
-        })
-        .fold(1000.0, f32::max) - squish;
 
     // Draw the clues.
 
