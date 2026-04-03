@@ -149,7 +149,7 @@ fn main() {
     let title_line_height = 170.0;
 
     let clue_sep = 180.0;
-    let section_sep = 65.0;
+    let section_sep = 95.0;
 
     let clue_indent = 50.0;
     let clue_content_indent = 195.0;
