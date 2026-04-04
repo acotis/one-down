@@ -60,6 +60,8 @@ Replace any letter with a non-space, non-`.` character, and the tool will interp
 
 # A larger example
 
+Here's a UK-style crossword I created with this tool.
+
 ![A larger crossword puzzle](examples/up_output_puzzle.png)
 
 # License
