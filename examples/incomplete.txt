@@ -1,0 +1,17 @@
+
+. . W . U
+C R O S S
+% . R . E
+% % D % R
+% . S . .
+
+@Title: Tiny Crossword
+@Author: acotis
+
+CROSS: Angry, in Britain
+WORDS: What clues are made of
+
+%%%%%%%%%%%%%%%%%%%
+
+Comments can go below this line
+

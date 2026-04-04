@@ -1,0 +1,20 @@
+
+. . W . U
+C R O S S
+L . R . E
+A N D O R
+M . S . .
+
+@Title: Tiny Crossword
+@Author: acotis
+
+CROSS: Angry, in Britain
+WORDS: What clues are made of
+USER: Who's applying this tool
+ANDOR (3, 2): Both, or either
+CLAM: Beach dweller
+
+%%%%%%%%%%%%%%%%%%%
+
+Comments can go below this line
+
