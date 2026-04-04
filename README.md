@@ -12,6 +12,9 @@ L . R . E
 A N D O R
 M . S . .
 
+@Title: Tiny Crossword
+@Author: acotis
+
 CROSS: Angry, in Britain
 WORDS: What clues are made of
 USER: Who's applying this tool
@@ -21,6 +24,7 @@ CLAM: Beach dweller
 %%%%%%%%%%%%%%%%%%%
 
 Comments can go below this line
+
 ```
 
 Running this command:
@@ -44,7 +48,7 @@ Clues are automatically marked with their answer lengths. If the answer has more
 
 Any line with `%%%` causes parsing to stop. You can put comments or whatever other junk you want after that line and the tool will ignore it.
 
-Metadata:
+## Title, author, and text-wrapping
 
 - Use `@Title: Hello world` to set the title.
 - Use `@Author: Jane Doe` to set the author.
