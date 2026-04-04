@@ -58,6 +58,10 @@ Any line with `%%%` causes parsing to stop. You can put comments or whatever oth
 
 Replace any letter with a non-space, non-`.` character, and the tool will interpret that tile as a blank tile that you haven't yet chosen a letter for. Answers intersecting that tile will be given placeholder clues in the clue column. See `examples/incomplete.txt` for an example.
 
+## Error handling
+
+This tool has very poor error handling. Do just about anything wrong and it crashes. Sorry!
+
 # A larger example
 
 Here's a UK-style crossword I created with this tool.
