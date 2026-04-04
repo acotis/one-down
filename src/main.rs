@@ -157,11 +157,11 @@ fn main() {
 
     // Create the text objects that will be used to draw text.
 
-    let lora = Font::from_memory_static(include_bytes!("Lora-Regular.ttf")).expect("couldn't load Lora font");
-    //let lora_bold = Font::from_memory_static(include_bytes!("Lora-Bold.ttf")).expect("couldn't load Lora font");
-    let dejavusans = Font::from_memory_static(include_bytes!("DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
-    let dejavusans_bold = Font::from_memory_static(include_bytes!("DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
-    let dejavusans_italic = Font::from_memory_static(include_bytes!("DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
+    let lora = Font::from_memory_static(include_bytes!("../fonts/Lora-Regular.ttf")).expect("couldn't load Lora font");
+    //let lora_bold = Font::from_memory_static(include_bytes!("../fonts/Lora-Bold.ttf")).expect("couldn't load Lora font");
+    let dejavusans = Font::from_memory_static(include_bytes!("../fonts/DejaVuSans.ttf")).expect("couldn't load Deja Vu Sans font");
+    let dejavusans_bold = Font::from_memory_static(include_bytes!("../fonts/DejaVuSans-Bold.ttf")).expect("couldn't load Deja Vu Sans Bold font");
+    let dejavusans_italic = Font::from_memory_static(include_bytes!("../fonts/DejaVuSans-Oblique.ttf")).expect("couldn't load Deja Vu Sans Italic font");
 
     let mut number_text = create_text(&dejavusans,      number_size,        Color::BLACK);
     let mut clue_text   = create_text(&lora,            clue_text_size,     Color::BLACK);
