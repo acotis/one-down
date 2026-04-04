@@ -13,5 +13,5 @@ WORDS: What clues are made of
 
 %%%%%%%%%%%%%%%%%%%
 
-Comments can go below this line
+Any text down here is ignored
 

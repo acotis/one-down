@@ -23,7 +23,7 @@ CLAM: Beach dweller
 
 %%%%%%%%%%%%%%%%%%%
 
-Comments can go below this line
+Any text down here is ignored
 
 ```
 
