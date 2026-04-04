@@ -11,7 +11,7 @@ M . S . .
 CROSS: Angry, in Britain
 WORDS: What clues are made of
 USER: Who's applying this tool
-ANDOR (3, 2): Both, or either
+AND OR: Both, or either
 CLAM: Beach dweller
 
 %%%%%%%%%%%%%%%%%%%

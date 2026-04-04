@@ -16,7 +16,7 @@ AMOK: Sounds like a decoy is acting wild?
 YAPS: Talks constantly but pays randomly
 IDEA: Mediocre restaurant reveals a fresh concept
 RENT: Borrow money to pay the landlord
-UMAD (1,3): Text sent to check temperature in puma den
+U MAD: Text sent to check temperature in puma den
 
 RADII: Half circle spans multiple lengths from center to border
 SKYWARD: Pesky warden shows up

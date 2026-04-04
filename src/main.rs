@@ -53,20 +53,11 @@ fn main() {
                 "@AUTHOR" => {author = Some(right.trim().to_owned());}
                 "@CLUE-WIDTH" => {max_clue_line_length = right.trim().parse().unwrap();}
                 _ => {
-                    let [word, ref lengths@..] =
-                        left.split(['(',',',' ',')'])
-                            .filter(|bit| *bit != "")
-                            .collect::<Vec<_>>()[..]
-                    else {panic!()};
-
-                    let lengths_bit = if lengths.is_empty() {
-                        format!("({})", word.trim().len())
-                    } else {
-                        format!("({})", lengths.join(",\u{a0}"))
-                    };
+                    let answer_parts = left.split(" ").collect::<Vec<_>>();
+                    let lengths_bit = format!("({})", answer_parts.iter().map(|part| format!("{}", part.len())).collect::<Vec<_>>().join(",\u{a0}"));
 
                     clue_texts
-                         .entry(word.trim().to_owned())
+                         .entry(answer_parts.join(""))
                          .or_insert(vec![])
                          .push(Clue {
                              lines: (right.replace("'", "’").trim().to_owned() + "\u{a0}" + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),

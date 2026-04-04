@@ -18,7 +18,7 @@ M . S . .
 CROSS: Angry, in Britain
 WORDS: What clues are made of
 USER: Who's applying this tool
-ANDOR (3, 2): Both, or either
+AND OR: Both, or either
 CLAM: Beach dweller
 
 %%%%%%%%%%%%%%%%%%%
@@ -44,7 +44,7 @@ In the puzzle body, `.` means a black square and any letter means a white square
 
 In the clue list, simply write the answer word, then a colon, then the clue you want to give for that word. Put one clue on each line.
 
-Clues are automatically marked with their answer lengths. If the answer has more than one word, put the lengths in parentheses after the answer in the clue line.
+Clues are automatically marked with their answer lengths. If the answer has more than one word, write it that way in the clue line and the length hints will reflect it.
 
 Any line with `%%%` causes parsing to stop. You can put comments or whatever other junk you want after that line and the tool will ignore it.
 
