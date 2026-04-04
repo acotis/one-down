@@ -42,7 +42,7 @@ Produces two files, `puzzle.png` and `answer_key.png`, which look like this:
 
 In the puzzle body, `.` means a black square and any letter means a white square with that letter in it. Spaces are ignored.
 
-In the clue list, simply write the answer word, then a colon, then the clue you want to give for that word. Put one clue on each line.
+In the clue list, simply write the answer word, then a colon, then the clue you want to give for that word. Put one answer/clue pair on each line.
 
 Clues are automatically marked with their answer lengths. If the answer has more than one word, write it that way in the clue line and the length hint will reflect it.
 
