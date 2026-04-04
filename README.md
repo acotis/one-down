@@ -54,9 +54,13 @@ Any line with `%%%` causes parsing to stop. You can put comments or whatever oth
 - Use `@Author: Jane Doe` to set the author.
 - Use `@Clue-Width: 2500` to set the width (in pixels) that clues are allowed to take up. Clue texts automatically wrap at word boundaries.
 
-## Formatting word-in-progress puzzles
+## Formatting work-in-progress puzzles
 
-Replace any letter with a non-space, non-`.` character, and the tool will interpret that tile as a blank tile that you haven't yet filled with a letter. Answers intersecting that tile will be given placeholder clues in the clue column.
+Replace any letter with a non-space, non-`.` character, and the tool will interpret that tile as a blank tile that you haven't yet filled with a letter. Answers intersecting that tile will be given placeholder clues in the clue column. See `examples/incomplete.txt` for an example.
+
+# A larger example
+
+![A larger crossword puzzle](examples/up_output_puzzle.png)
 
 # License
 
