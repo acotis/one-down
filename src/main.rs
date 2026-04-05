@@ -160,9 +160,32 @@ fn main() {
     let mut title_text  = create_text(&dejavusans_bold, title_size,         Color::BLACK);
     let mut key_text    = create_text(&dejavusans_bold, key_size,           Color::rgb(0, 0, 255));
 
+    // Compute maximum natural length of a line of text.
+
+    let max_natural_line_length =
+        clue_texts
+            .iter()
+            .map(|(_word, clues)| {
+                clues.iter().map(|clue| {
+                    clue.lines.iter().map(|line| {
+                        clue_text.set_string(line);
+                        clue_text.local_bounds().width as u32
+                    })
+                    .max()
+                    .unwrap()
+                })
+                .max()
+                .unwrap()
+            })
+            .max()
+            .unwrap_or(0);
+
     // Draw the board.
 
-    let mut texture = RenderTexture::new(8192, 8192)
+    let tex_width = scale as usize * (width + 3) + (max_clue_line_length as u32).min(max_natural_line_length) as usize;
+    let tex_height = scale as usize * height * 2;
+
+    let mut texture = RenderTexture::new(tex_width as u32, tex_height as u32)
         .expect("could not create render texture");
 
     texture.clear(Color::WHITE);
