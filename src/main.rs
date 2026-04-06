@@ -25,7 +25,8 @@ fn main() {
     let mut title: Option<String> = None;
     let mut author: Option<String> = None;
     let mut flat_title: bool = true;
-    let mut max_clue_line_length: f32 = f32::MAX;
+    let mut max_clue_line_length_col_1: Option<f32> = None;
+    let mut max_clue_line_length_col_2: Option<f32> = None;
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
     let mut down_words: Vec<(usize, String)> = vec![];
@@ -51,7 +52,8 @@ fn main() {
             match &*left {
                 "@TITLE"  => {title  = Some(right.trim().to_owned());}
                 "@AUTHOR" => {author = Some(right.trim().to_owned());}
-                "@CLUE-WIDTH" => {max_clue_line_length = right.trim().parse().unwrap();}
+                "@CLUE-WIDTH"       => {max_clue_line_length_col_1 = Some(right.trim().parse().unwrap());}
+                "@CLUE-WIDTH-COL-2" => {max_clue_line_length_col_2 = Some(right.trim().parse().unwrap());}
                 _ => {
                     let answer_parts = left.split(" ").collect::<Vec<_>>();
                     let lengths_bit = format!("({})", answer_parts.iter().map(|part| format!("{}", part.len())).collect::<Vec<_>>().join(",\u{a0}"));
@@ -182,7 +184,11 @@ fn main() {
 
     // Draw the board.
 
-    let tex_width = scale as usize * (width + 3) + (max_clue_line_length as u32).min(max_natural_line_length) as usize;
+    let tex_width = 
+        scale as usize * (width + 3) 
+        + max_clue_line_length_col_1.unwrap_or(f32::MAX).min(max_natural_line_length as f32) as usize
+        + max_clue_line_length_col_2.unwrap_or(0.0     ).min(max_natural_line_length as f32) as usize;
+
     let tex_height = scale as usize * height * 2;
 
     let mut texture = RenderTexture::new(tex_width as u32, tex_height as u32)
@@ -219,8 +225,9 @@ fn main() {
 
     // Draw the clues.
 
+    let clue_start_y = scale * 0.75;
     let mut x = scale * (width as f32 + 1.05);
-    let mut y = scale * 0.75;
+    let mut y = clue_start_y;
 
     let across_count = across_words.len();
     let down_count = down_words.len();
@@ -235,6 +242,12 @@ fn main() {
 
         if c == across_count {
             y += section_sep;
+
+            if max_clue_line_length_col_2.is_some() {
+                y = clue_start_y;
+                x = max_x_drawn;
+            }
+
             header_text.set_position(Vector2f::new(x - header_dedent, y));
             header_text.set_string("Down");
             texture.draw(&header_text);
@@ -283,7 +296,13 @@ fn main() {
                     clue_text.set_string(&format!("{line} {}", words[j]));
                 }
 
-                if j == words.len() || clue_text.local_bounds().width > max_clue_line_length {
+                let max_clue_line_length = if c < across_count {
+                    max_clue_line_length_col_1
+                } else {
+                    max_clue_line_length_col_2.or(max_clue_line_length_col_1)
+                };
+
+                if j == words.len() || clue_text.local_bounds().width > max_clue_line_length.unwrap_or(f32::MAX) {
                     clue_text.set_string(&line);
                     clue_text.set_position(Vector2f::new(x + clue_content_indent + clue_indent, y));
                     texture.draw(&clue_text);
