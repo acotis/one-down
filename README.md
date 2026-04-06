@@ -53,6 +53,7 @@ Any line with `%%%` causes parsing to stop. You can put comments or whatever oth
 - Use `@Title: Hello world` to set the title.
 - Use `@Author: Jane Doe` to set the author.
 - Use `@Clue-Width: 2500` to set the width (in pixels) that clues are allowed to take up. Clue texts automatically wrap at word boundaries.
+- Use `@Clue-With-Col-2: 2500` to put the Down clues in a separate column and simultaneously specify the maximum width of that column. Clue texts wrap automatically.
 
 ## Formatting work-in-progress puzzles
 
