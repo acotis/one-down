@@ -185,7 +185,7 @@ fn main() {
     // Draw the board.
 
     let tex_width = 
-        scale as usize * (width + 3) 
+        scale as usize * (width + 5) 
         + max_clue_line_length_col_1.unwrap_or(f32::MAX).min(max_natural_line_length as f32) as usize
         + max_clue_line_length_col_2.unwrap_or(0.0     ).min(max_natural_line_length as f32) as usize;
 
