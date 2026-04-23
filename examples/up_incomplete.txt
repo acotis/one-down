@@ -7,7 +7,7 @@ I 0 0 A . . 0
 . 0 . R E N T
 0 0 0 D . . 0
 
-@Title: Up (work in progress)
+@Title: Up
 @Author: Fire
 @Clue-Width: 2650
 
