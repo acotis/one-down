@@ -41,6 +41,8 @@ fn main() {
             break;
         }
 
+        let line = line.split("//").next().unwrap();
+
         if line.trim().to_uppercase() == "@TALL-TITLE" {
             flat_title = false;
             continue;
