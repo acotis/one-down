@@ -16,7 +16,7 @@ M . S . .
 @Author: acotis
 
 CROSS: Angry, in Britain
-WORDS: What clues are made of
+WORDS: What clues are made of   // This is a comment
 USER: Who's applying this tool
 AND OR: Both, or either
 CLAM: Beach dweller
@@ -48,27 +48,27 @@ Clues are automatically marked with their answer lengths. If the answer has more
 
 Any line with `%%%` causes parsing to stop. You can put comments or whatever other junk you want after that line and the tool will ignore it.
 
-## Title, author, and text-wrapping
+## More features
 
 - Use `@Title: Hello world` to set the title.
 - Use `@Author: Jane Doe` to set the author.
 - Use `@Clue-Width: 2500` to set the width (in pixels) that clues are allowed to take up. Clue texts automatically wrap at word boundaries.
 - Use `@Clue-With-Col-2: 2500` to put the Down clues in a separate column and simultaneously specify the maximum width of that column. Clue texts wrap automatically.
-- Use `//` to create a comment, as in `ANSWER: Clue clue clue // comment`.
-
-## Formatting work-in-progress puzzles
-
-Replace any letter with a non-space, non-`.` character, and the tool will interpret that tile as a blank tile that you haven't yet chosen a letter for. Answers intersecting that tile will be given placeholder clues in the clue column. See `examples/incomplete.txt` for an example.
+- In the grid, use `0` or any other non-letter character to indicate a white square that you haven't chosen a letter for yet. The tile will appear blank even in the answer key, and a placeholder clue will be created for words that cross through it. See `examples/incomplete.txt` for an example.
+- On any line, use `//` to create a comment, as in `ANSWER: Clue clue clue // comment`.
 
 ## Error handling
 
 This tool has very poor error handling. Do just about anything wrong and it crashes. Sorry!
 
-# A larger example
+# Gallery
 
-Here's a UK-style crossword I created with this tool.
+Here are some more outputs from the tool; all clues are UK-style "cryptic" clues.
 
 ![A larger crossword puzzle](examples/up_output_puzzle.png)
+![A larger crossword puzzle in a work-in-progress state](examples/up_incomplete_output_puzzle.png)
+![A full-sized crossword puzzle](examples/pip_pip_cutie_output_puzzle.png)
+![The answer key for the full-sized crossword puzzle](examples/pip_pip_cutie_output_answer_key.png)
 
 # License
 

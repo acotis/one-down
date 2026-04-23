@@ -1,0 +1,342 @@
+
+C O H O S  T E D . A  S K I N G
+A . U . I  . X . . .  N . N . R
+C O M P L  E T E . T  A C K L E
+T . M . K  . R . G .  K . . . A
+I S I T .  B A R O N  E S S E S
+
+. . N . .  O . . L .  E . P . I
+N I G H T  A N D D A  Y . I C E
+O . B . A  . O . E .  E . L . S
+T M I . B  A N A N A  S P L I T
+A . R . B  . O . . T  . . E . .
+
+T O D A Y  S N E W S  . I D O L
+I . . . C  . O . O .  M . M . I
+O F F D A  Y . A V I  A T I O N
+N . I . T  . . . E .  N . L . E
+S E X I S  T . U N P  A C K E D
+
+@Title: Pip pip, cutie!
+@Author: Fire
+@Clue-Width: 2200
+@Clue-Width-Col-2: 2200
+
+COHOSTED: Bigender presenter at halftime helped make the show
+IS IT: Really, I sit in the same order?
+CACTI: First story arc opens with a hundred tanks in the desert
+COMPLETE: Do let me cop out
+BARONESSES: Ladies of the land, lord of the S.S. Estate
+NIGHT AND DAY: Pressing on without pause or rest — a marked improvement
+NO NO NO: Two consecutive letters, written in triplicate, expressing vehement objection
+ATS: Requests attention from, in cat-speak
+SNAKE EYES: Pip pip, cutie! Leave Charlie behind and grab a couple of beers. Yes!
+TMI: I didn't need to know that, Tim... that's messed up
+TODAYS NEWS: Articles in this morning's paper say we don't mess with the Sierra
+SPILLED MILK: Bad meds — took a pill and I look empty. But it's done and can't be fixed
+EXTRA: Sexy stomach, trashy crop-top, and like, unnecessary attitude
+BOA: Ship transporting a snake
+SEXIST: A negative attitude about men — say — exists, unfortunately
+ICE: Author's diametric opposite caught red-handed in horrific executions
+INK: Contents of well?!
+IDOL: Superstar not up to anything, allegedly
+AVIATION: How to get off the ground in AI? Through weights without the slightest bit of soul containing the seed of intelligence
+WOVEN: Child's expression of love... new beginning spun into existence
+FIX: Dose of utter fascination
+MANA: Managers cutting corners on rules and exercising power
+LINED: Give a bad grade to a straightedge sort of paper
+UNPACKED: Taken out and analyzed in depth
+GOLDEN: Goodnight hugs... old, old, and very valuable
+ASKING: Requesting, as ruler
+SILK: Basilisk back at Solvaar's island starts shooting out soft stuff
+NOTATIONS: Countries coming around to right-to-left writing systems
+HUMMINGBIRD: Flyer: MUTE SINGING GAL
+TACKLE: Try and heckle teaching assistant for her eccentric introductions?
+OFF DAY: Skipped shift at work — word gets around and creates a brief episode of reduced productivity and morale
+BANANA SPLIT: Leave with a fruit (a very sugary treat)
+GREASIEST: In pioneering research, the simplest tasks can be the slipperiest ones
+TABBY CATS: Little brown tigers starting to terrifically amuse Betty, but drive Stacy up the wall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+——————————
+TODO
+——————————
+
+——————————
+IDEAS
+——————————
+
+greasiest: In greatness, the simplest thing can be the most slippery
+    graduation
+    granularity
+    grappling
+    gratitude
+    gravity
+    greatness
+    greece
+    grep
+    grid
+    grift
+    grill
+    grin
+    grip
+    groggy
+    gross
+    groups
+    growing
+    aggregate
+    research!!
+        leg
+        big
+        cig
+        pig
+        rig
+        bug
+        wug
+    thinking
+    emerging
+    groundbreaking
+
+off day: In retrospect, a skipped work shift led to an unusual episode of underperformance
+
+tackle: Heckle teaching assistant for her [...] starts, bowl her completely over
+tackle: Heckle teaching assistant for her eccentric openers, [...]
+tackle: Heckle teaching assistant for her eccentric introductions, [...]
+tackle: Heckle teaching assistant for her eccentric introductions attempt
+tackle: Heckle teaching assistant for her eccentric icebreakers attempt
+esoteric
+exotic
+
+banana split: "Fruit break!"
+
+NIGHT AND DAY: As different as different can be, without pause or rest
+
+lined: paper for writing dialog got a bad grade
+lined: Giving a bad grade to a [...] kind of paper
+lined: Giving a bad grade to an edgy sort of paper
+senses of "line":
+    queue
+        waiting place
+        turn-taking structure
+    boundary (social)
+        limiting
+    edge of a shape
+        bounding
+    edge of a cartoon
+    standard to meet
+    "toe the line"
+    just a drawn line
+        straight
+        flat?
+        direct
+        arrow
+
+mana: Managers cut corners on rules and [G..E] to get power
+mana: Managers cutting corners on rules and ending up with power
+    → "up" is dangling
+ending
+exiting
+entering
+exemplifying
+explicating
+edifying
+estimating
+eliminating
+entertaining
+mana: Managers cutting corners on rules and exercising power
+
+EXTRA: Sexy stomach, trashy top — kind of a waste?
+
+aviation: How to get off the ground in [A]? Through [TION]
+    → use the fact that "weight" (like AI weights) = "ton"
+    → "put the seed of intelligence in a massive weight"
+aviation: How to get off the ground in AI? By putting the seed of intelligence into a massive weight box
+    → "massive weight box" doesn't really clue ton or work great on the surface
+aviation: Getting off the ground in AI by putting the seed of intelligence into the middle of a big vat o' numbers
+aviation: Getting off the ground in AI by encapsulating the seed of intelligence in weights without the slightest bit of soul
+aviation: Getting off the ground in AI through weights without the slightest bit of soul containing the seed of intelligence
+
+unpacked: United, it's a family of wolves. [...]
+
+idol: I dole out Estrogen to bring about God's likeness
+    → I had a dubious relationship to Google re the meaning of "idol"
+    → also might just be a slightly rude clue (trans women are not "god")
+    → also Estrogen → E is only widely-known in some audiences
+        → well, maybe it's universal in biology or whatever
+
+TABBYCATS: Little brown tigers start to truly [endear] Betsy, but make Stacy hit the roof?
+Little brown tigers starting to tepidly annoy Betsy, but drive Stacy up the wall
+Little brown tigers starting to tentatively annoy Betsy, but drive Stacy up the wall
+Little brown tigers just starting to annoy Betsy, but driving Stacy up the wall?
+start to endear Betsy
+start to grow on Betsy
+start to affect Betsy
+start to please Betsy
+start to tickle Betsy
+start to gain Betsy's favor
+start to admire Betsy
+start to accept Betsy
+acquiese
+acquire
+aspire
+attire
+allure
+accept
+affect
+abscond
+abhor
+adore
+attention
+avail
+assent
+assess
+ascribe
+assume
+ally
+attain
+appeal
+appease
+appetize
+abide
+appear
+absolve
+tacitly
+tad
+tax
+access Betty's [B: favor]?
+achieve Betty's [B: favor]?
+assess
+allievate
+alarm
+allure (?)
+assume!
+[T] along Betty's [B: favor]
+ameliorate
+amass
+amend
+among
+amok
+accomodate
+analyze
+annex
+aptly bother Betty
+[A] bother Betty
+amuse
+avoid
+avow
+awe
+awaken
+amaze
+
+
+
+involved in [words containing "ice" that also crucify the I.C.E. for its recent actions]
+
+asking: SKIN in AG (silver)!
+
+spilled milk: What's done to St. Paul is likely starting to meld badly with [...]
+spilled milk: Bad meds, took a pill, lying on [ILK]... it's done and there's no going back
+spilled milk: Bad meds, took a pill, I like odd stuff... but what's done is done
+spilled milk: Bad meds... took a pill, I look empty... but what's done is done
+
+baronesses: google corrected my understanding of this word (from "female baron" to "wife of a baron") after it was already locked in and way too late to change it. I came up with the straight "ladies of the land" before googling it and will lock it in as my straight to avoid google having helped me make a good puzzle.
+
+ample: Casual stroll sounds sufficient
+
+asking, sample, negatives, violas, notations
+
+golden: Goodnight-hugs around old old [straight]
+
+ats: Mentions in cat-speak
+
+unbacked: "United Nations-supported" is unsupported
+    → kinda BS, I think "supported → BACKED" is underconstrained here
+
+aviation: a 6-by-1 on-flight
+
+todays news: ["says we don't" anagram]
+
+CACTI: First story arc opens with cold desert's tanks
+
+no not i: Denial: no, sounds like no one
+    → via NAUGHT for "sounds like no"
+
+golden: "Boring old English offers up [...]"
+
+Tabby cats: [...] TA with a little toy gun gets stacy written up
+
+cacti: "act I"
+
+campsite: "mic, amp, sit everyone"...
+
+banana split: [B] a grandmother broke for [straight]
+
+night and day: Polar opposites making the world go 'round
+night and day: Polar opposites 'round the clock
+
+hummingbird: Mute singing gal makes for great flyer
+
+cohosted: Weirdly, most of those in the bigender dorms make things [...]
+    [broken, this anagrams the output of wordplay]
+cohosted: Weirdly, those mostly in the bigender dorms make things [...]
+cohosted: Appeared on a podcast with rude girls taking T in the all-gender dorm
+    [not sure "all-gender dorm" can be "co-ed" (which is an adjective)]
+cohosting: Bigender host in process of helping make a podcast
+    [I think "in" here is invalid]
+COHOSTED: Bigender presenter at halftime did the show along with others
+
+gravity: "making the world go 'round"
+    — initially thought because gravity makes the world a sphere
+    — but really works better as saying it makes the world orbit the sun
+
+cutoffthenose
+tospitetheface
+
+
+123456789012345
+———————————————
+bananasplit
+breadandbutter
+whiteonrice
+peanutbutter
+hummingbird
+nightandday
+peasinapod
+peasinpods
+existential
+loansharking
+worldscollide
+bytheseatofyourpants
+meditation
+superintelligence
+artificial
+intelligence
+extinctionrisk
+takeadeepbreath
+takearaincheck
+misdirection
+ultimategame
+chesschampion
+magnuscarlsen
+
+——————————
+TRASH
+——————————
+
+Consider if I stand behind "manic extremism" as a politcal reference.
+Consider a better alternative to "weights".
+Consider a better alternative to "Solvaar's".
+
+Try to make NIGHT AND DAY flow better and be righter.
+    — 100% uptime — a marked improvement
+    — 100% uptime marked improvement
+    — Continuing without pause or rest marked improvement
+    — Pressing on without pause or rest — a marked improvement?
+
+Consider a better alternative to "tentatively amuse".
+    → "truly amaze"?
+
+Consider a better alternative to "pioneering".
+Consider a better alternative to "straightedge".
+
