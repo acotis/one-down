@@ -66,7 +66,7 @@ This tool has very poor error handling. Do just about anything wrong and it cras
 Here are some more outputs from the tool; all clues are UK-style "cryptic" clues.
 
 ![A larger crossword puzzle](examples/up_output_puzzle.png)
-![A larger crossword puzzle in a work-in-progress state](examples/up_incomplete_output_puzzle.png)
+![The larger puzzle's answer key, in a work-in-progress state](examples/up_incomplete_output_answer_key.png)
 ![A full-sized crossword puzzle](examples/pip_pip_cutie_output_puzzle.png)
 ![The answer key for the full-sized crossword puzzle](examples/pip_pip_cutie_output_answer_key.png)
 
