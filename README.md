@@ -53,7 +53,7 @@ Any line with `%%%` causes parsing to stop. You can put comments or whatever oth
 - Use `@Title: Hello world` to set the title.
 - Use `@Author: Jane Doe` to set the author.
 - Use `@Clue-Width: 6` to set the width that clues are allowed to take up, measured in grid-tiles. Clue texts automatically wrap at word boundaries.
-- Use `@Clue-With-Col-2: 6` to put the Down clues in a separate column and also specify the maximum width they can take up.
+- Use `@Clue-With-Col-2: 6` to put the Down clues in a separate column and also specify the maximum width of that column.
 - In the grid, use `0` or any other non-letter character to indicate a white square that you haven't chosen a letter for yet. The tile will appear blank even in the answer key, and a placeholder clue will be created for words that cross through it. See `examples/up_incomplete.txt` for an example.
 - On any line, use `//` to create a comment, as in `ANSWER: Clue clue clue // comment`.
 
