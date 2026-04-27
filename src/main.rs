@@ -131,24 +131,30 @@ fn main() {
 
     // Define render constants.
 
-    let scale: f32 = 384.0; // Side length of each cell in pixels.
+    let factor: f32 = 0.5;
+    let scale: f32 = 384.0 * factor; // Side length of each cell in pixels.
 
-    let clue_text_size = 120;
-    let header_text_size = 165;
-    let number_size = 105;
-    let key_size = 210;
-    let title_size = 120;
+    let clue_text_size = (120.0 * factor) as u32;
+    let header_text_size = (165.0 * factor) as u32;
+    let number_size = (105.0 * factor) as u32;
+    let key_size = (210.0 * factor) as u32;
+    let title_size = (120.0 * factor) as u32;
 
-    let clue_line_height = 140.0;
-    let header_line_height = 260.0;
-    let title_line_height = 170.0;
+    let clue_line_height = 140.0 * factor;
+    let header_line_height = 260.0 * factor;
+    let title_line_height = 170.0 * factor;
 
-    let clue_sep = 180.0;
-    let section_sep = 95.0;
+    let clue_sep = 180.0 * factor;
+    let section_sep = 95.0 * factor;
 
-    let clue_indent = 50.0;
-    let clue_content_indent = 195.0;
-    let header_dedent = 12.0;
+    let clue_indent = 50.0 * factor;
+    let clue_content_indent = 195.0 * factor;
+    let header_dedent = 12.0 * factor;
+
+    // Adjust the column width variables from units of tiles to units of pixels.
+
+    max_clue_line_length_col_1 = max_clue_line_length_col_1.map(|x| x * scale);
+    max_clue_line_length_col_2 = max_clue_line_length_col_2.map(|x| x * scale);
 
     // Create the text objects that will be used to draw text.
 
@@ -305,7 +311,7 @@ fn main() {
                 };
 
                 if j == words.len() || clue_text.local_bounds().width > max_clue_line_length.unwrap_or(f32::MAX) {
-                    clue_text.set_string(&line);
+                    clue_text.set_string(&line.replace("\u{a0}", " "));
                     clue_text.set_position(Vector2f::new(x + clue_content_indent + clue_indent, y));
                     texture.draw(&clue_text);
 
