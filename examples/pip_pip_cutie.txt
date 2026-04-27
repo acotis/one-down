@@ -19,8 +19,8 @@ S E X I S  T . U N P  A C K E D
 
 @Title: Pip pip, cutie!
 @Author: Fire
-@Clue-Width: 2200
-@Clue-Width-Col-2: 2200
+@Clue-Width: 6
+@Clue-Width-Col-2: 6
 
 COHOSTED: Bigender presenter at halftime helped make the show
 IS IT: Really, I sit in the same order?

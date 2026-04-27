@@ -9,7 +9,7 @@ I 0 0 A . . 0
 
 @Title: Up
 @Author: Fire
-@Clue-Width: 2650
+@Clue-Width: 7
 
 SMOL: Little, cute and silly!
 AMOK: Sounds like a decoy is acting wild?
