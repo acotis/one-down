@@ -57,8 +57,28 @@ fn main() {
                 "@CLUE-WIDTH"       => {max_clue_line_length_col_1 = Some(right.trim().parse().unwrap());}
                 "@CLUE-WIDTH-COL-2" => {max_clue_line_length_col_2 = Some(right.trim().parse().unwrap());}
                 _ => {
-                    let answer_parts = left.split(" ").collect::<Vec<_>>();
-                    let lengths_bit = format!("({})", answer_parts.iter().map(|part| format!("{}", part.len())).collect::<Vec<_>>().join(",\u{a0}"));
+                    let answer_parts = left.split(|c: char| !c.is_alphabetic()).collect::<Vec<_>>();
+
+                    // compute the length hint
+
+                    let mut lengths_bit = format!("");
+                    let mut consecutive_alphabetic = 0;
+
+                    for c in left.trim().chars().chain(std::iter::once('\t')) {
+                        if c.is_alphabetic() {
+                            consecutive_alphabetic += 1;
+                        } else {
+                            if consecutive_alphabetic > 0 {
+                                lengths_bit += &format!("{consecutive_alphabetic}");
+                                consecutive_alphabetic = 0;
+                            }
+                            lengths_bit += &format!("{c}").replace(" ", ",\u{a0}");
+                        }
+                    }
+
+                    lengths_bit = format!("({})", lengths_bit.trim());
+
+                    // register this clue in the cluedict
 
                     clue_texts
                          .entry(answer_parts.join(""))
