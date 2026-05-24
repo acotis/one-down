@@ -12,8 +12,8 @@ I 0 0 A . . 0
 @Clue-Width: 7
 
 SMOL: Little, cute and silly!
-AMOK: Sounds like a decoy is acting wild?
-RENT: Borrow money to pay the landlord
+@Tentative AMOK: Sounds like a decoy is acting wild?
+@Tentative RENT: Borrow money to pay the landlord
 
 RADII: Half circle spans multiple lengths from center to border
 SALTY: Bitter but not bitter

@@ -15,6 +15,7 @@ struct Cell {
 #[derive(Clone)]
 struct Clue {
     lines: Vec<String>,
+    tentative: bool,
 }
 
 fn main() {
@@ -49,7 +50,7 @@ fn main() {
         }
 
         if let Some((left_raw, right)) = line.split_once(":") {
-            let left = left_raw.to_uppercase();
+            let mut left = left_raw.to_uppercase();
 
             match &*left {
                 "@TITLE"  => {title  = Some(right.trim().to_owned());}
@@ -57,6 +58,14 @@ fn main() {
                 "@CLUE-WIDTH"       => {max_clue_line_length_col_1 = Some(right.trim().parse().unwrap());}
                 "@CLUE-WIDTH-COL-2" => {max_clue_line_length_col_2 = Some(right.trim().parse().unwrap());}
                 _ => {
+
+                    let tentative = if left.trim().starts_with("@TENTATIVE") {
+                        left = left.split_once("@TENTATIVE").unwrap().1.trim().to_owned();
+                        true
+                    } else {
+                        false
+                    };
+
                     let answer_parts = left.split(|c: char| !c.is_alphabetic()).collect::<Vec<_>>();
 
                     // compute the length hint
@@ -85,6 +94,7 @@ fn main() {
                          .or_insert(vec![])
                          .push(Clue {
                              lines: (right.replace("'", "’").trim().to_owned() + "\u{a0}" + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
+                             tentative,
                          });
                 }
             }
@@ -288,9 +298,9 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()]}];
+        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()], tentative: false}];
 
-        let (clue_vec, clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
+        let (clue_vec, mut clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
         } else {
             (&mut default, Color::rgb(240, 0, 0), &dejavusans_bold)
@@ -301,6 +311,10 @@ fn main() {
         }
 
         let clue = clue_vec.remove(0);
+
+        if clue.tentative {
+            clue_color = Color::rgb(240, 123, 9);
+        }
 
         clue_text.set_position(Vector2f::new(x + clue_indent, y));
         clue_text.set_string(&format!("{number}."));
