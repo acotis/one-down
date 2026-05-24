@@ -40,6 +40,7 @@ fn main() {
     let mut clue_texts: HashMap<String, Vec<Clue>> = HashMap::new();
     let mut across_words: Vec<(usize, String)> = vec![];
     let mut down_words: Vec<(usize, String)> = vec![];
+    let mut any_part_unfinished = false;
 
     // Read the puzzle file.
 
@@ -70,9 +71,11 @@ fn main() {
 
                     let status = if left.trim().starts_with("@TENTATIVE") {
                         left = left.split_once("@TENTATIVE").unwrap().1.trim().to_owned();
+                        any_part_unfinished = true;
                         Tentative
                     } else if left.trim().starts_with("@DRAFT") {
                         left = left.split_once("@DRAFT").unwrap().1.trim().to_owned();
+                        any_part_unfinished = true;
                         Draft
                     } else {
                         Final
@@ -315,6 +318,7 @@ fn main() {
         let (clue_vec, mut clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
         } else {
+            any_part_unfinished = true;
             (&mut default, Color::rgb(240, 0, 0), &dejavusans_bold)
         };
 
@@ -420,7 +424,21 @@ fn main() {
                 y + title_text.local_bounds().height + scale * 0.3
             );
 
-            //y += title_line_height;
+            y += title_line_height;
+        }
+
+        if any_part_unfinished {
+            title_text.set_font(&dejavusans_bold);
+            title_text.set_string("DRAFT");
+            title_text.set_fill_color(Color::rgb(240, 0, 0));
+            title_text.set_position(Vector2f::new(x, y));
+            texture.draw(&title_text);
+
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.2
+            );
+
+            //y += title_line_height
         }
     } else {
         y = scale * (height as f32 + 0.95);
@@ -450,6 +468,22 @@ fn main() {
             title_text.set_string(&author);
             title_text.set_position(Vector2f::new(x, y));
             texture.draw(&title_text);
+
+            x += title_text.local_bounds().width * 1.3;
+
+            max_y_drawn = max_y_drawn.max(
+                y + title_text.local_bounds().height + scale * 0.2
+            );
+        }
+
+        if any_part_unfinished {
+            title_text.set_font(&dejavusans_bold);
+            title_text.set_string("DRAFT");
+            title_text.set_fill_color(Color::rgb(240, 0, 0));
+            title_text.set_position(Vector2f::new(x, y));
+            texture.draw(&title_text);
+
+            //x += title_text.local_bounds().width;
 
             max_y_drawn = max_y_drawn.max(
                 y + title_text.local_bounds().height + scale * 0.2
