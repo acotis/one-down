@@ -15,6 +15,6 @@ SMOL: Little, cute and silly!
 @Tentative AMOK: Sounds like a decoy is acting wild?
 @Tentative RENT: Borrow money to pay the landlord
 
-RADII: Half circle spans multiple lengths from center to border
+@Draft RADII: Half circle spans multiple lengths from center to border
 SALTY: Bitter but not bitter
 

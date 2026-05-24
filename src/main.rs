@@ -6,16 +6,25 @@ use sfml::cpp::FBox;
 use sfml::graphics::*;
 use sfml::system::Vector2;
 
+use Status::*;
+
 #[derive(PartialEq, Eq)]
 struct Cell {
     letter: Option<char>,
     number: Option<usize>,
 }
 
+#[derive(Copy, Clone, PartialEq, Eq)]
+enum Status {
+    Final,      // clue is done
+    Draft,      // clue could use some polish
+    Tentative,  // clue might be replaced entirely
+}
+
 #[derive(Clone)]
 struct Clue {
     lines: Vec<String>,
-    tentative: bool,
+    status: Status,
 }
 
 fn main() {
@@ -59,11 +68,14 @@ fn main() {
                 "@CLUE-WIDTH-COL-2" => {max_clue_line_length_col_2 = Some(right.trim().parse().unwrap());}
                 _ => {
 
-                    let tentative = if left.trim().starts_with("@TENTATIVE") {
+                    let status = if left.trim().starts_with("@TENTATIVE") {
                         left = left.split_once("@TENTATIVE").unwrap().1.trim().to_owned();
-                        true
+                        Tentative
+                    } else if left.trim().starts_with("@DRAFT") {
+                        left = left.split_once("@DRAFT").unwrap().1.trim().to_owned();
+                        Draft
                     } else {
-                        false
+                        Final
                     };
 
                     let answer_parts = left.split(|c: char| !c.is_alphabetic()).collect::<Vec<_>>();
@@ -94,7 +106,7 @@ fn main() {
                          .or_insert(vec![])
                          .push(Clue {
                              lines: (right.replace("'", "’").trim().to_owned() + "\u{a0}" + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
-                             tentative,
+                             status,
                          });
                 }
             }
@@ -298,7 +310,7 @@ fn main() {
             down_words[c-across_count].clone()
         };
 
-        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()], tentative: false}];
+        let mut default = vec![Clue {lines: vec![word.replace(|c: char| !c.is_ascii_alphabetic(), " _ ").replace("  ", " ").trim().to_owned()], status: Final}];
 
         let (clue_vec, mut clue_color, clue_font) = if let Some(clue_vec) = clue_texts.get_mut(&word.to_uppercase()) {
             (clue_vec, Color::BLACK, &lora)
@@ -312,8 +324,10 @@ fn main() {
 
         let clue = clue_vec.remove(0);
 
-        if clue.tentative {
-            clue_color = Color::rgb(240, 123, 9);
+        if clue.status == Tentative {
+            clue_color = Color::rgb(240, 113, 0);
+        } else if clue.status == Draft {
+            clue_color = Color::rgb(140, 140, 140);
         }
 
         clue_text.set_position(Vector2f::new(x + clue_indent, y));
