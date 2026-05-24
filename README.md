@@ -57,6 +57,7 @@ Any line with `%%%` causes parsing to stop. You can put comments or whatever oth
 - In the grid, use `0` or any other non-letter character to indicate a white square that you haven't chosen a letter for yet. The tile will appear blank even in the answer key, and a placeholder clue will be created for words that cross through it. See `examples/up_incomplete.txt` for an example.
 - On any line, use `//` to create a comment, as in `ANSWER: Clue clue clue // comment`.
 - Preface a clue with `@Tentative` to mark it as tentative; it will show up in orange in the image render.
+- Preface a clue with `@Draft` to mark it as tentative; it will show up in pale grey in the image render.
 
 ## Error handling
 
