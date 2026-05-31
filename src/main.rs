@@ -328,9 +328,9 @@ fn main() {
 
         let clue = clue_vec.remove(0);
 
-        if clue.status == Tentative {
+        if clue.status == Draft {
             clue_color = Color::rgb(240, 113, 0);
-        } else if clue.status == Draft {
+        } else if clue.status == Tentative {
             clue_color = Color::rgb(140, 140, 140);
         }
 
