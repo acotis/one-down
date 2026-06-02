@@ -108,7 +108,7 @@ fn main() {
                          .entry(answer_parts.join(""))
                          .or_insert(vec![])
                          .push(Clue {
-                             lines: (right.replace("'", "’").trim().to_owned() + "\u{a0}" + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
+                             lines: (right.replace("'", "’").trim().to_owned() + if answer_parts.len() == 1 {"\u{a0}"} else {" "} + &lengths_bit).split("\\").map(str::trim).map(str::to_owned).collect(),
                              status,
                          });
                 }
